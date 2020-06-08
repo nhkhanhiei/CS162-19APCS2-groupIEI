@@ -242,6 +242,14 @@ struct Student
 	string id, password, name, DoB, Class, status;
 };
 
+string schedule[100];
+CSD Schedule[100];
+Student student[200];
+int k = 0; // num of course
+int n; // num of student
+string x, y, z, t;
+
+
 Date stringToDate(string a)
 {
 	Date b;
@@ -350,8 +358,6 @@ void CreateCourseSchedule(string year, string semester, string Class, CSD schedu
 
 void CreateCourseStudent(string year, string semester, string Class, CSD schedule[], int k)
 {
-	int n;
-	Student student[200];
 	string filename = "Student-" + Class + ".txt";
 	ifstream f(filename);
 	if (f.is_open())
@@ -390,7 +396,7 @@ void CreateCourseStudent(string year, string semester, string Class, CSD schedul
 				fout << student[j].DoB << endl;
 				fout << student[j].Class << endl;
 				fout << student[j].status << endl;
-				for (int k = 0; k < 4; k++) {
+				for (int d = 0; d < 4; d++) {
 					fout << -1 << endl;
 				}
 				for (int h = 0; h < 10; h++)
@@ -410,7 +416,6 @@ void CreateCourseStudent(string year, string semester, string Class, CSD schedul
 
 void ImportAndCreateFile()
 {
-	string x, y, z, t;
 	cout << "Enter Year: ";
 	getline(cin, x);
 	cout << "Enter Semester: ";
@@ -421,9 +426,8 @@ void ImportAndCreateFile()
 	getline(cin, t);
 
 
-	string schedule[100];
 	string temp;
-	int k = 0;
+	
 
 	ifstream import(t);
 	if (import.is_open()) {
@@ -437,7 +441,7 @@ void ImportAndCreateFile()
 		cout << "Import Failed!" << endl;
 	import.close();
 
-	CSD Schedule[100];
+
 	int a = 0;
 	for (int i = 0; i < k; i++)
 	{
@@ -484,9 +488,167 @@ void ImportAndCreateFile()
 	CreateCourseStudent(x, y, z, Schedule, k);
 }
 
+// Manually add an new course (must import first)
+void AddNewCourse()
+{
+	CSD newcourse;
+	string startdate, enddate;
+	cout << "Input course id: ";
+	getline(cin, newcourse.courseID);
+	cout << "Input course name: ";
+	getline(cin, newcourse.courseName);
+	cout << "Input course class: ";
+	getline(cin, newcourse.Class);
+	cout << "Input course lecturer username: ";
+	getline(cin, newcourse.lecturerUsername);
+	cout << "Input course lecturer name: ";
+	getline(cin, newcourse.lecturerName);
+	cout << "Input course lecturer degree: ";
+	getline(cin, newcourse.lecturerDegree);
+	cout << "Input course lecturer Gender (0: male, 1: female): ";
+	getline(cin, newcourse.lecturerGender);
+	cout << "Input course start date (m/d/y): ";
+	getline(cin, startdate);
+	newcourse.startDate = stringToDate(startdate);
+	cout << "Input course end date (m/d/y): ";
+	getline(cin, enddate);
+	newcourse.endDate = stringToDate(enddate);
+	cout << "Input course day study: ";
+	cin >> newcourse.dayStudy;
+	cout << "Input course start hour: ";
+	cin >> newcourse.startHour;
+	cout << "Input course start minute: ";
+	cin >> newcourse.startMin;
+	cout << "Input course end hour: ";
+	cin >> newcourse.endHour;
+	cout << "Input course end minute: ";
+	cin >> newcourse.endMin;
+	cout << "Input course lecture room: ";
+	cin.ignore();
+	getline(cin, newcourse.lectureRoom);
+
+	k++;
+	string filename = x + "-" + y + "-Schedule-" + z + ".txt";
+	ofstream f(filename);
+	if (f.is_open())
+	{
+		f << k << endl;
+		for (int i = 0; i < k; i++)
+		{
+			if (i == k - 1)
+			{
+				f << newcourse.courseID << endl;
+				f << newcourse.courseName << endl;
+				f << newcourse.Class << endl;
+				f << newcourse.lecturerUsername << endl;
+				f << newcourse.lecturerName << endl;
+				f << newcourse.lecturerDegree << endl;
+				f << newcourse.lecturerGender << endl;
+				f << newcourse.startDate.year << " " << dayFormat(newcourse.startDate.month) << " " << dayFormat(newcourse.startDate.day) << endl;
+				f << newcourse.endDate.year << " " << dayFormat(newcourse.endDate.month) << " " << dayFormat(newcourse.endDate.day) << endl;
+				f << newcourse.dayStudy << endl;
+				f << newcourse.startHour << " " << newcourse.startMin << endl;
+				f << newcourse.endHour << " " << newcourse.endMin << endl;
+				f << newcourse.lectureRoom << endl;
+				f << endl;
+			}
+			else
+			{
+				f << Schedule[i].courseID << endl;
+				f << Schedule[i].courseName << endl;
+				f << Schedule[i].Class << endl;
+				f << Schedule[i].lecturerUsername << endl;
+				f << Schedule[i].lecturerName << endl;
+				f << Schedule[i].lecturerDegree << endl;
+				f << Schedule[i].lecturerGender << endl;
+				f << Schedule[i].startDate.year << " " << dayFormat(Schedule[i].startDate.month) << " " << dayFormat(Schedule[i].startDate.day) << endl;
+				f << Schedule[i].endDate.year << " " << dayFormat(Schedule[i].endDate.month) << " " << dayFormat(Schedule[i].endDate.day) << endl;
+				f << Schedule[i].dayStudy << endl;
+				f << Schedule[i].startHour << " " << Schedule[i].startMin << endl;
+				f << Schedule[i].endHour << " " << Schedule[i].endMin << endl;
+				f << Schedule[i].lectureRoom << endl;
+				f << endl;
+			}
+		}
+	}
+	else
+		cout << "Could not open file!" << endl;
+	f.close();
+
+	for (int i = 0; i < k; i++)
+	{
+		if (i == k - 1)
+		{
+			string File = x + "-" + y + "-" + z + "-" + newcourse.courseID + "-Student.txt";
+			ofstream fout(File);
+			if (fout.is_open())
+			{
+				fout << n << endl;
+				for (int j = 0; j < n; j++)
+				{
+					int q = 0;
+					fout << student[j].id << endl;
+					fout << student[j].password << endl;
+					fout << student[j].name << endl;
+					fout << student[j].DoB << endl;
+					fout << student[j].Class << endl;
+					fout << student[j].status << endl;
+					for (int d = 0; d < 4; d++) {
+						fout << -1 << endl;
+					}
+					for (int h = 0; h < 10; h++)
+					{
+						fout << AttendanceDate(newcourse.startDate, q, newcourse.startHour, newcourse.startMin, newcourse.endHour, newcourse.endMin) << endl;
+						q += 7;
+					}
+					fout << 1 << endl;
+					fout << endl;
+				}
+			}
+			else
+				cout << "Could not open file!" << endl;
+			fout.close();
+		}
+		else
+		{
+			string File = x + "-" + y + "-" + z + "-" + Schedule[i].courseID + "-Student.txt";
+			ofstream fout(File);
+			if (fout.is_open())
+			{
+				fout << n << endl;
+				for (int j = 0; j < n; j++)
+				{
+					int q = 0;
+					fout << student[j].id << endl;
+					fout << student[j].password << endl;
+					fout << student[j].name << endl;
+					fout << student[j].DoB << endl;
+					fout << student[j].Class << endl;
+					fout << student[j].status << endl;
+					for (int d = 0; d < 4; d++) {
+						fout << -1 << endl;
+					}
+					for (int h = 0; h < 10; h++)
+					{
+						fout << AttendanceDate(Schedule[i].startDate, q, Schedule[i].startHour, Schedule[i].startMin, Schedule[i].endHour, Schedule[i].endMin) << endl;
+						q += 7;
+					}
+					fout << 1 << endl;
+					fout << endl;
+				}
+			}
+			else
+				cout << "Could not open file!" << endl;
+			fout.close();
+		}
+	}
+}
+
+
 int main()
 {
 	ImportAndCreateFile();
+	//AddNewCourse();
 	system("pause>nul");
 	return 0;
 }
