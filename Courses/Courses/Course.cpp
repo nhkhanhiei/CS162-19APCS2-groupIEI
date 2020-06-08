@@ -719,6 +719,68 @@ void EditCourse()
 	fout.close();
 }
 
+// Remove a Course (must import first)
+void RemoveCourse()
+{
+	int t;
+	cout << "Input id of course to remove: ";
+	cin >> t;
+
+	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
+
+	remove((file).c_str());
+
+	for (int i = t - 1; i < k; i++)
+	{
+		if (i == k - 1)
+			break;
+		Schedule[i].id = Schedule[i + 1].id;
+		Schedule[i].courseID = Schedule[i + 1].courseID;
+		Schedule[i].courseName = Schedule[i + 1].courseName;
+		Schedule[i].Class = Schedule[i + 1].Class;
+		Schedule[i].lecturerUsername = Schedule[i + 1].lecturerUsername;
+		Schedule[i].lecturerName = Schedule[i + 1].lecturerName;
+		Schedule[i].lecturerDegree = Schedule[i + 1].lecturerDegree;
+		Schedule[i].lecturerGender = Schedule[i + 1].lecturerGender;
+		Schedule[i].startDate = Schedule[i + 1].startDate;
+		Schedule[i].endDate = Schedule[i + 1].endDate;
+		Schedule[i].dayStudy = Schedule[i + 1].dayStudy;
+		Schedule[i].startHour = Schedule[i + 1].startHour;
+		Schedule[i].startMin = Schedule[i + 1].startMin;
+		Schedule[i].endHour = Schedule[i + 1].endHour;
+		Schedule[i].endMin = Schedule[i + 1].endMin;
+		Schedule[i].lectureRoom = Schedule[i + 1].id;
+	}
+	k--;
+
+	string filename = x + "-" + y + "-Schedule-" + z + ".txt";
+	ofstream f(filename);
+	if (f.is_open())
+	{
+		f << k << endl;
+		for (int i = 0; i < k; i++)
+		{
+			f << Schedule[i].courseID << endl;
+			f << Schedule[i].courseName << endl;
+			f << Schedule[i].Class << endl;
+			f << Schedule[i].lecturerUsername << endl;
+			f << Schedule[i].lecturerName << endl;
+			f << Schedule[i].lecturerDegree << endl;
+			f << Schedule[i].lecturerGender << endl;
+			f << Schedule[i].startDate.year << " " << dayFormat(Schedule[i].startDate.month) << " " << dayFormat(Schedule[i].startDate.day) << endl;
+			f << Schedule[i].endDate.year << " " << dayFormat(Schedule[i].endDate.month) << " " << dayFormat(Schedule[i].endDate.day) << endl;
+			f << Schedule[i].dayStudy << endl;
+			f << Schedule[i].startHour << " " << Schedule[i].startMin << endl;
+			f << Schedule[i].endHour << " " << Schedule[i].endMin << endl;
+			f << Schedule[i].lectureRoom << endl;
+			f << endl;
+		}
+	}
+	else
+		cout << "Could not open file!" << endl;
+	f.close();
+}
+
 
 
 int main()
@@ -726,6 +788,7 @@ int main()
 	ImportAndCreateFile();
 	//AddNewCourse();
 	//EditCourse();
+	//RemoveCourse();
 	system("pause>nul");
 	return 0;
 }
