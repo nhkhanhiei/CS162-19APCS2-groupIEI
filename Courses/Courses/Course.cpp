@@ -781,6 +781,51 @@ void RemoveCourse()
 	f.close();
 }
 
+// Remove a Student from a Course (must import first)
+void RemoveStudentFromCourse()
+{
+	string r;
+	int t;
+	cout << "Input id of student you want to remove: ";
+	getline(cin, r);
+	cout << "Input id of course to remove the student from: ";
+	cin >> t;
+
+	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
+
+	ofstream fout(file);
+	if (fout.is_open())
+	{
+		fout << n << endl;
+		for (int j = 0; j < n; j++)
+		{
+			int q = 0;
+			fout << student[j].id << endl;
+			fout << student[j].password << endl;
+			fout << student[j].name << endl;
+			fout << student[j].DoB << endl;
+			fout << student[j].Class << endl;
+			fout << student[j].status << endl;
+			for (int d = 0; d < 4; d++) {
+				fout << -1 << endl;
+			}
+			for (int h = 0; h < 10; h++)
+			{
+				fout << AttendanceDate(Schedule[t-1].startDate, q, Schedule[t-1].startHour, Schedule[t-1].startMin, Schedule[t-1].endHour, Schedule[t-1].endMin) << endl;
+				q += 7;
+			}
+			if (student[j].id == r)
+				fout << 0 << endl;
+			else
+				fout << 1 << endl;
+			fout << endl;
+		}
+	}
+	else
+		cout << "Could not open file!" << endl;
+	fout.close();
+}
+
 
 
 int main()
@@ -789,6 +834,7 @@ int main()
 	//AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
+	RemoveStudentFromCourse();
 	system("pause>nul");
 	return 0;
 }
