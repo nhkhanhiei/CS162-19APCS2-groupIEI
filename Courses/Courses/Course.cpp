@@ -248,6 +248,7 @@ CSD Schedule[100];
 Student student[200];
 int k = 0; // num of course
 int n; // num of student
+string removedstudent;
 string x, y, z, t;
 
 
@@ -710,7 +711,10 @@ void EditCourse()
 				fout << AttendanceDate(Schedule[t-1].startDate, q, Schedule[t-1].startHour, Schedule[t-1].startMin, Schedule[t-1].endHour, Schedule[t-1].endMin) << endl;
 				q += 7;
 			}
-			fout << 1 << endl;
+			if (student[j].id == removedstudent)
+				fout << 0 << endl;
+			else
+				fout << 1 << endl;
 			fout << endl;
 		}
 	}
@@ -784,10 +788,9 @@ void RemoveCourse()
 // Remove a Student from a Course (must import first)
 void RemoveStudentFromCourse()
 {
-	string r;
 	int t;
 	cout << "Input id of student you want to remove: ";
-	getline(cin, r);
+	getline(cin, removedstudent);
 	cout << "Input id of course to remove the student from: ";
 	cin >> t;
 
@@ -814,11 +817,95 @@ void RemoveStudentFromCourse()
 				fout << AttendanceDate(Schedule[t-1].startDate, q, Schedule[t-1].startHour, Schedule[t-1].startMin, Schedule[t-1].endHour, Schedule[t-1].endMin) << endl;
 				q += 7;
 			}
-			if (student[j].id == r)
+			if (student[j].id == removedstudent)
 				fout << 0 << endl;
 			else
 				fout << 1 << endl;
 			fout << endl;
+		}
+	}
+	else
+		cout << "Could not open file!" << endl;
+	fout.close();
+}
+
+// Add a student to a course (must import first)
+string DoBtoPassword(string input)
+{
+	input.erase(remove(input.begin(), input.end(), ' '), input.end());
+	return input;
+}
+
+void AddNewStudentToCourse()
+{
+	int t;
+	Student newstudent;
+	cout << "Input course id to add new student in: ";
+	cin >> t;
+	cout << "Add new student" << endl;
+	cout << "------------------------" << endl;
+	cout << "Input new student id: " << endl;
+	cin.ignore();
+	getline(cin, newstudent.id);
+	cout << "Input new student name: " << endl;
+	getline(cin, newstudent.name);
+	cout << "Input new student day of birth (yyyy mm dd): " << endl;
+	getline(cin, newstudent.DoB);
+	newstudent.password = DoBtoPassword(newstudent.DoB);
+	newstudent.Class = z;
+	newstudent.status = "1";
+
+
+	string File = x + "-" + y + "-" + z + "-" + Schedule[t-1].courseID + "-Student.txt";
+	ofstream fout(File);
+	if (fout.is_open())
+	{
+		fout << n + 1 << endl;
+		for (int j = 0; j < n + 1; j++)
+		{
+			if (j == n)
+			{
+				int q = 0;
+				fout << newstudent.id << endl;
+				fout << newstudent.password << endl;
+				fout << newstudent.name << endl;
+				fout << newstudent.DoB << endl;
+				fout << newstudent.Class << endl;
+				fout << newstudent.status << endl;
+				for (int d = 0; d < 4; d++) {
+					fout << -1 << endl;
+				}
+				for (int h = 0; h < 10; h++)
+				{
+					fout << AttendanceDate(Schedule[t - 1].startDate, q, Schedule[t - 1].startHour, Schedule[t - 1].startMin, Schedule[t - 1].endHour, Schedule[t - 1].endMin) << endl;
+					q += 7;
+				}
+				fout << 1 << endl;
+				fout << endl;
+			}
+			else
+			{
+				int q = 0;
+				fout << student[j].id << endl;
+				fout << student[j].password << endl;
+				fout << student[j].name << endl;
+				fout << student[j].DoB << endl;
+				fout << student[j].Class << endl;
+				fout << student[j].status << endl;
+				for (int d = 0; d < 4; d++) {
+					fout << -1 << endl;
+				}
+				for (int h = 0; h < 10; h++)
+				{
+					fout << AttendanceDate(Schedule[t - 1].startDate, q, Schedule[t - 1].startHour, Schedule[t - 1].startMin, Schedule[t - 1].endHour, Schedule[t - 1].endMin) << endl;
+					q += 7;
+				}
+				if (student[j].id == removedstudent)
+					fout << 0 << endl;
+				else
+					fout << 1 << endl;
+				fout << endl;
+			}
 		}
 	}
 	else
@@ -834,7 +921,8 @@ int main()
 	//AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
-	RemoveStudentFromCourse();
+	//RemoveStudentFromCourse();
+	AddNewStudentToCourse();
 	system("pause>nul");
 	return 0;
 }
