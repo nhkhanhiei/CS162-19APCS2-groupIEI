@@ -418,6 +418,8 @@ void CreateCourseStudent(string year, string semester, string Class, CSD schedul
 
 void ImportAndCreateFile()
 {
+	cout << "Input to Import: " << endl;
+	cout << "---------------------------------------" << endl;
 	cout << "Enter Year: ";
 	getline(cin, x);
 	cout << "Enter Semester: ";
@@ -965,13 +967,17 @@ void ViewListOfCourse()
 //View list of Student in a Course (must import first)
 void ViewListOfStudentInCourse()
 {
+	string a;
+	cout << "Input class to view student list: ";
+	getline(cin, a);
+
 	int t;
 	cout << "Input id of course to view student list: ";
 	cin >> t;
 
 	cout << "There is/are " << k << " Student(s) in this Course " << Schedule[t-1].courseID << endl;
 	cout << "--------------------------------------------" << endl;
-	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
+	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
 	int m;
 	Student temp;
 	ifstream f(file);
@@ -1005,6 +1011,53 @@ void ViewListOfStudentInCourse()
 	f.close();
 }
 
+//View Attendance list of Student in a Course (must import first)
+void ViewAttendanceListOfCourse()
+{
+	string a;
+	cout << "Input class to view student list: ";
+	getline(cin, a);
+
+	int t;
+	cout << "Input id of course to view attendance list: ";
+	cin >> t;
+
+	cout << "Attendance List of Student(s) in this Course " << Schedule[t - 1].courseID << endl;
+	cout << "--------------------------------------------" << endl;
+	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
+	int m;
+	string temp;
+	ifstream f(file);
+	if (f.is_open())
+	{
+		f >> m;
+		for (int i = 0; i < m; i++)
+		{
+			if (i == 0)
+				f.ignore();
+			getline(f, temp);
+			cout << setw(17) << left << "Student Id: " << temp << endl;
+			f.ignore(numeric_limits<streamsize>::max(), '\n');
+			getline(f, temp);
+			cout << setw(17) << left << "Student Name: " << temp << endl;
+			cout << "Attendance list: " << endl;
+			for (int p = 0; p < 7; p++)
+				f.ignore(numeric_limits<streamsize>::max(), '\n');
+			for (int p = 0; p < 10; p++)
+			{
+				getline(f, temp);
+				cout << temp << endl;
+			}
+			for (int p = 0; p < 2; p++)
+				f.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "--------------------------------------------" << endl;
+		}
+	}
+	else
+		cout << "Could not open file to view!" << endl;
+	f.close();
+}
+
 int main()
 {
 	ImportAndCreateFile();
@@ -1014,7 +1067,8 @@ int main()
 	//RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
-	ViewListOfStudentInCourse();
+	//ViewListOfStudentInCourse();
+	ViewAttendanceListOfCourse();
 	system("pause>nul");
 	return 0;
 }
