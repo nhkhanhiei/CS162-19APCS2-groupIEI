@@ -5,6 +5,7 @@
 #include <sstream>
 #include <ctime>
 #include <cstdio>
+#include <iomanip>
 using namespace std;
 
 
@@ -913,7 +914,30 @@ void AddNewStudentToCourse()
 	fout.close();
 }
 
-
+//View list of Course (must import first)
+void ViewListOfCourse()
+{
+	cout << "There is/are " << k << " course(s) in this current Semester: " << endl;
+	cout << "--------------------------------------------" << endl;
+	for (int i = 0; i < k; i++)
+	{
+		cout << i + 1 << ")" << endl;
+		cout << setw(30) << left << "Course Id: " << Schedule[i].courseID << endl;
+		cout << setw(30) << left << "Course Name: " << Schedule[i].courseName << endl;
+		cout << setw(30) << left << "Course Class: " << Schedule[i].Class << endl;
+		cout << setw(30) << left << "Course Lecturer username: " << Schedule[i].lecturerUsername << endl;
+		cout << setw(30) << left << "Course Lecturer name: " << Schedule[i].lecturerName << endl;
+		cout << setw(30) << left << "Course Lecturer Degree: " << Schedule[i].lecturerDegree << endl;
+		cout << setw(30) << left << "Course Lecturer Gender: " << Schedule[i].lecturerGender << endl;
+		cout << setw(30) << left << "Course Start date: " << Schedule[i].startDate.year << " " << dayFormat(Schedule[i].startDate.month) << " " << dayFormat(Schedule[i].startDate.day) << endl;
+		cout << setw(30) << left << "Course End date: " << Schedule[i].endDate.year << " " << dayFormat(Schedule[i].endDate.month) << " " << dayFormat(Schedule[i].endDate.day) << endl;
+		cout << setw(30) << left << "Course Day study: " << Schedule[i].dayStudy << endl;
+		cout << setw(30) << left << "Course Start time: " << Schedule[i].startHour << " " << Schedule[i].startMin << endl;
+		cout << setw(30) << left << "Course End time: " << Schedule[i].endHour << " " << Schedule[i].endMin << endl;
+		cout << setw(30) << left << "Course Lecture room: " << Schedule[i].lectureRoom << endl;
+		cout << "--------------------------------------------" << endl;
+	}
+}
 
 int main()
 {
@@ -922,7 +946,8 @@ int main()
 	//EditCourse();
 	//RemoveCourse();
 	//RemoveStudentFromCourse();
-	AddNewStudentToCourse();
+	//AddNewStudentToCourse();
+	ViewListOfCourse();
 	system("pause>nul");
 	return 0;
 }
