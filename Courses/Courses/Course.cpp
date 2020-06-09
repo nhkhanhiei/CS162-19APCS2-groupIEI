@@ -249,7 +249,6 @@ CSD Schedule[100];
 Student student[200];
 int k = 0; // num of course
 int n; // num of student
-string removedstudent;
 string x, y, z, t;
 
 
@@ -620,9 +619,7 @@ void EditCourse()
 	cout << "Input id of course to edit: ";
 	cin >> t;
 
-	string file = x + "-" + y + "-" + z + "-" + Schedule[t-1].courseID + "-Student.txt";
-
-	remove((file).c_str());
+	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
 
 	string startdate, enddate;
 	Schedule[t-1].id = t;
@@ -691,19 +688,33 @@ void EditCourse()
 	f.close();
 
 	string File = x + "-" + y + "-" + z + "-" + Schedule[t-1].courseID + "-Student.txt";
+	int m;
+	Student temp;
 	ofstream fout(File);
-	if (fout.is_open())
+	ifstream fin(file);
+	if (fin.is_open() && fout.is_open())
 	{
-		fout << n << endl;
-		for (int j = 0; j < n; j++)
+		fin >> m;
+		fout << m << endl;
+		for (int j = 0; j < m; j++)
 		{
+			if (j == 0)
+				fin.ignore();
+			getline(fin, temp.id);
+			getline(fin, temp.password);
+			getline(fin, temp.name);
+			getline(fin, temp.DoB);
+			getline(fin, temp.Class);
+			getline(fin, temp.status);
+			for (int p = 0; p < 16; p++)
+				fin.ignore(numeric_limits<streamsize>::max(), '\n');
 			int q = 0;
-			fout << student[j].id << endl;
-			fout << student[j].password << endl;
-			fout << student[j].name << endl;
-			fout << student[j].DoB << endl;
-			fout << student[j].Class << endl;
-			fout << student[j].status << endl;
+			fout << temp.id << endl;
+			fout << temp.password << endl;
+			fout << temp.name << endl;
+			fout << temp.DoB << endl;
+			fout << temp.Class << endl;
+			fout << temp.status << endl;
 			for (int d = 0; d < 4; d++) {
 				fout << -1 << endl;
 			}
@@ -712,16 +723,15 @@ void EditCourse()
 				fout << AttendanceDate(Schedule[t-1].startDate, q, Schedule[t-1].startHour, Schedule[t-1].startMin, Schedule[t-1].endHour, Schedule[t-1].endMin) << endl;
 				q += 7;
 			}
-			if (student[j].id == removedstudent)
-				fout << 0 << endl;
-			else
-				fout << 1 << endl;
+			fout << 1 << endl;
 			fout << endl;
 		}
 	}
 	else
 		cout << "Could not open file!" << endl;
 	fout.close();
+	fin.close();
+	remove((file).c_str());
 }
 
 // Remove a Course (must import first)
@@ -789,6 +799,7 @@ void RemoveCourse()
 // Remove a Student from a Course (must import first)
 void RemoveStudentFromCourse()
 {
+	string removedstudent;
 	int t;
 	cout << "Input id of student you want to remove: ";
 	getline(cin, removedstudent);
@@ -797,12 +808,22 @@ void RemoveStudentFromCourse()
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
 
+	int m;
+	ifstream fi(file);
+	if (fi.is_open())
+	{
+		fi >> m;
+	}
+	fi.close();
+
 	ofstream fout(file);
 	if (fout.is_open())
 	{
-		fout << n << endl;
-		for (int j = 0; j < n; j++)
+		fout << m - 1 << endl;
+		for (int j = 0; j < m; j++)
 		{
+			if (student[j].id == removedstudent)
+				continue;
 			int q = 0;
 			fout << student[j].id << endl;
 			fout << student[j].password << endl;
@@ -818,10 +839,7 @@ void RemoveStudentFromCourse()
 				fout << AttendanceDate(Schedule[t-1].startDate, q, Schedule[t-1].startHour, Schedule[t-1].startMin, Schedule[t-1].endHour, Schedule[t-1].endMin) << endl;
 				q += 7;
 			}
-			if (student[j].id == removedstudent)
-				fout << 0 << endl;
-			else
-				fout << 1 << endl;
+			fout << 1 << endl;
 			fout << endl;
 		}
 	}
@@ -845,26 +863,34 @@ void AddNewStudentToCourse()
 	cin >> t;
 	cout << "Add new student" << endl;
 	cout << "------------------------" << endl;
-	cout << "Input new student id: " << endl;
+	cout << "Input new student id: ";
 	cin.ignore();
 	getline(cin, newstudent.id);
-	cout << "Input new student name: " << endl;
+	cout << "Input new student name: ";
 	getline(cin, newstudent.name);
-	cout << "Input new student day of birth (yyyy mm dd): " << endl;
+	cout << "Input new student day of birth (yyyy mm dd): ";
 	getline(cin, newstudent.DoB);
 	newstudent.password = DoBtoPassword(newstudent.DoB);
 	newstudent.Class = z;
 	newstudent.status = "1";
 
-
 	string File = x + "-" + y + "-" + z + "-" + Schedule[t-1].courseID + "-Student.txt";
+
+	int m;
+	ifstream fi(File);
+	if (fi.is_open())
+	{
+		fi >> m;
+	}
+	fi.close();
+
 	ofstream fout(File);
 	if (fout.is_open())
 	{
-		fout << n + 1 << endl;
-		for (int j = 0; j < n + 1; j++)
+		fout << m + 1 << endl;
+		for (int j = 0; j < m + 1; j++)
 		{
-			if (j == n)
+			if (j == m)
 			{
 				int q = 0;
 				fout << newstudent.id << endl;
@@ -901,10 +927,7 @@ void AddNewStudentToCourse()
 					fout << AttendanceDate(Schedule[t - 1].startDate, q, Schedule[t - 1].startHour, Schedule[t - 1].startMin, Schedule[t - 1].endHour, Schedule[t - 1].endMin) << endl;
 					q += 7;
 				}
-				if (student[j].id == removedstudent)
-					fout << 0 << endl;
-				else
-					fout << 1 << endl;
+				fout << 1 << endl;
 				fout << endl;
 			}
 		}
@@ -939,6 +962,49 @@ void ViewListOfCourse()
 	}
 }
 
+//View list of Student in a Course (must import first)
+void ViewListOfStudentInCourse()
+{
+	int t;
+	cout << "Input id of course to view student list: ";
+	cin >> t;
+
+	cout << "There is/are " << k << " Student(s) in this Course " << Schedule[t-1].courseID << endl;
+	cout << "--------------------------------------------" << endl;
+	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
+	int m;
+	Student temp;
+	ifstream f(file);
+	if (f.is_open())
+	{
+		f >> m;
+		for (int i = 0; i < m; i++)
+		{
+			if (i == 0)
+				f.ignore();
+			getline(f, temp.id);
+			getline(f, temp.password);
+			getline(f, temp.name);
+			getline(f, temp.DoB);
+			getline(f, temp.Class);
+			getline(f, temp.status);
+			for (int p = 0; p < 16; p++)
+				f.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << i + 1 << ")" << endl;
+			cout << setw(30) << left << "Student Id: " << temp.id << endl;
+			cout << setw(30) << left << "Student Password: " << temp.password << endl;
+			cout << setw(30) << left << "Student Name: " << temp.name << endl;
+			cout << setw(30) << left << "Student Day of Birth: " << temp.DoB << endl;
+			cout << setw(30) << left << "Student Class: " << temp.Class << endl;
+			cout << setw(30) << left << "Student Status: " << temp.status << endl;
+			cout << "--------------------------------------------" << endl;
+		}
+	}
+	else
+		cout << "Could not open file to view!" << endl;
+	f.close();
+}
+
 int main()
 {
 	ImportAndCreateFile();
@@ -947,7 +1013,8 @@ int main()
 	//RemoveCourse();
 	//RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
-	ViewListOfCourse();
+	//ViewListOfCourse();
+	ViewListOfStudentInCourse();
 	system("pause>nul");
 	return 0;
 }
