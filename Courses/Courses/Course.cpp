@@ -249,6 +249,7 @@ CSD Schedule[100];
 Student student[200];
 int k = 0; // num of course
 int n; // num of student
+int u; // num of lecturer
 string x, y, z, t;
 
 
@@ -399,7 +400,7 @@ void CreateCourseStudent(string year, string semester, string Class, CSD schedul
 				fout << student[j].Class << endl;
 				fout << student[j].status << endl;
 				for (int d = 0; d < 4; d++) {
-					fout << -1 << endl;
+					fout << 7 << endl;
 				}
 				for (int h = 0; h < 10; h++)
 				{
@@ -414,6 +415,78 @@ void CreateCourseStudent(string year, string semester, string Class, CSD schedul
 			cout << "Could not open file!" << endl;
 		fout.close();
 	}
+}
+
+void UpdateLecturer()
+{
+	string name[100];
+	ifstream fread("Lecturer.txt");
+	if (fread.is_open())
+	{
+		fread >> u;
+		fread.ignore();
+		for (int i = 0; i < u; i++)
+		{
+			for (int j = 0; j < 2; j++)
+				fread.ignore(numeric_limits<streamsize>::max(), '\n');
+			getline(fread, name[i]);
+			for (int j = 0; j < 3; j++)
+				fread.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+	else
+		cout << "Could not open file!" << endl;
+	fread.close();
+
+	for (int i = 0; i < k; i++)
+	{
+		for (int j = 0; j < u; j++)
+		{
+			if (Schedule[i].lecturerName == name[j])
+				break;
+			if (j == u - 1 && Schedule[i].lecturerName != name[j])
+			{
+				u++;
+				string temp;
+				ifstream in("Lecturer.txt");
+				ofstream out("Lecturer1.txt");
+				if (in.is_open() && out.is_open())
+				{
+					getline(in, temp);
+					out << u << endl;
+					while (!in.eof())
+					{
+						getline(in, temp);
+						out << temp << endl;
+					}
+				}
+				else
+					cout << "Could not update lecturer!" << endl;
+				out.close();
+				in.close();
+
+				remove("Lecturer.txt");
+				rename("Lecturer1.txt", "Lecturer.txt");
+
+				ofstream fout("Lecturer.txt", ios::app);
+				if (fout.is_open())
+				{
+					fout << endl;
+					fout << Schedule[i].lecturerUsername << endl;
+					fout << Schedule[i].lecturerUsername << endl;
+					fout << Schedule[i].lecturerName << endl;
+					fout << Schedule[i].lecturerDegree << endl;
+					fout << Schedule[i].lecturerGender << endl;
+				}
+				else
+					cout << "Could not update lecturer!" << endl;
+				fout.close();
+				break;
+			}
+		}
+		
+	}
+
 }
 
 void ImportAndCreateFile()
@@ -491,6 +564,7 @@ void ImportAndCreateFile()
 
 	CreateCourseSchedule(x, y, z, Schedule, k);
 	CreateCourseStudent(x, y, z, Schedule, k);
+	UpdateLecturer();
 }
 
 // Manually add an new course (must import first)
@@ -598,7 +672,7 @@ void AddNewCourse()
 			fout << student[j].Class << endl;
 			fout << student[j].status << endl;
 			for (int d = 0; d < 4; d++) {
-				fout << -1 << endl;
+				fout << 7 << endl;
 			}
 			for (int h = 0; h < 10; h++)
 			{
@@ -718,7 +792,7 @@ void EditCourse()
 			fout << temp.Class << endl;
 			fout << temp.status << endl;
 			for (int d = 0; d < 4; d++) {
-				fout << -1 << endl;
+				fout << 7 << endl;
 			}
 			for (int h = 0; h < 10; h++)
 			{
@@ -834,7 +908,7 @@ void RemoveStudentFromCourse()
 			fout << student[j].Class << endl;
 			fout << student[j].status << endl;
 			for (int d = 0; d < 4; d++) {
-				fout << -1 << endl;
+				fout << 7 << endl;
 			}
 			for (int h = 0; h < 10; h++)
 			{
@@ -902,7 +976,7 @@ void AddNewStudentToCourse()
 				fout << newstudent.Class << endl;
 				fout << newstudent.status << endl;
 				for (int d = 0; d < 4; d++) {
-					fout << -1 << endl;
+					fout << 7 << endl;
 				}
 				for (int h = 0; h < 10; h++)
 				{
@@ -922,7 +996,7 @@ void AddNewStudentToCourse()
 				fout << student[j].Class << endl;
 				fout << student[j].status << endl;
 				for (int d = 0; d < 4; d++) {
-					fout << -1 << endl;
+					fout << 7 << endl;
 				}
 				for (int h = 0; h < 10; h++)
 				{
@@ -1058,9 +1132,47 @@ void ViewAttendanceListOfCourse()
 	f.close();
 }
 
+//View all Lecturers 
+void ViewAllLecturers()
+{
+	int a;
+	string temp;
+	ifstream f("Lecturer.txt");
+	if (f.is_open())
+	{
+		f >> a;
+		cout << "There are " << a << " lecturers: " << endl;
+		cout << "---------------------------------" << endl;
+		for (int i = 0; i < a; i++)
+		{
+			if (i == 0)
+				f.ignore();
+			cout << i + 1 << ")" << endl;
+			getline(f, temp);
+			cout << setw(20) << left << "Username: " << temp << endl;
+			getline(f, temp);
+			cout << setw(20) << left << "Password: " << temp << endl;
+			getline(f, temp);
+			cout << setw(20) << left << "Name: " << temp << endl;
+			getline(f, temp);
+			cout << setw(20) << left << "Degree: " << temp << endl;
+			getline(f, temp);
+			if (temp == "0")
+				cout << setw(20) << left << "Gender: " << "Male" << endl;
+			else
+				cout << setw(20) << left << "Gender: " << "Female" << endl;
+			cout << "---------------------------------" << endl;
+			f.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+	else
+		cout << "Could not open file to view!" << endl;
+	f.close();
+}
+
 int main()
 {
-	ImportAndCreateFile();
+	//ImportAndCreateFile();
 	//AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
@@ -1068,7 +1180,8 @@ int main()
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
 	//ViewListOfStudentInCourse();
-	ViewAttendanceListOfCourse();
+	//ViewAttendanceListOfCourse();
+	ViewAllLecturers();
 	system("pause>nul");
 	return 0;
 }
