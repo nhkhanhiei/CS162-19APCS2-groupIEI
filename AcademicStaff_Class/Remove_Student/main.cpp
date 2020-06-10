@@ -419,7 +419,7 @@ void removeStudent()
 			}
 			else if (sOfClass[i].id == tempID && sOfClass[i].status == 0)
 			{
-				cout << "This student has already been removed!" << endl;
+				cout << "This student is currently inactive, cannot be removed!" << endl;
 				check--;
 			}
 		}

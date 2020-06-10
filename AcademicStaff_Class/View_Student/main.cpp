@@ -156,7 +156,7 @@ int viewStudent()
 
 int main()
 {
-	viewStudent();
+	viewClass();
 	if (_CrtDumpMemoryLeaks())
 		cout << "\nMemory leak!" << endl;
 	system("pause>nul");
