@@ -163,7 +163,6 @@ void ExportAttendance()
 	}
 	fin.close();
 
-
 	fstream fout;
 	int pos = filename.find(".txt");
 	filename.erase(pos);
