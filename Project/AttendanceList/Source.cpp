@@ -21,7 +21,7 @@ struct Attendance {
 struct Student
 {
 	string id, password, name, DoB, Class, status,midterm,final,bonus,total;
-	Attendance att[11];
+	string att[11];
 };
 
 struct CourseData
@@ -86,7 +86,7 @@ void ViewAttendance()
 		getline(fin, student[i].bonus);
 		getline(fin, student[i].total);
 		for(int j = 0; j < 10; j++)
-		getline(fin, student[i].att[j].day);
+		getline(fin, student[i].att[j]);
 		getline(fin, temp);
 		fin.ignore(1, '\n');
 	}
@@ -95,16 +95,16 @@ void ViewAttendance()
 		cout << student[i].name << ": " << endl;
 		for (int j = 0; j < 10; j++)
 		{
-			int length = student[i].att[j].day.length();
-			if (student[i].att[j].day[length - 1] == '1')
+			int length = student[i].att[j].length();
+			if (student[i].att[j][length - 1] == '1')
 			{
-				student[i].att[j].day.resize(11);
-				cout << student[i].att[j].day << ": Absent" << endl;
+				student[i].att[j].resize(11);
+				cout << student[i].att[j] << ": Absent" << endl;
 			}
 			else
 			{
-				student[i].att[j].day.resize(11);
-				cout << student[i].att[j].day << ": Present" << endl;
+				student[i].att[j].resize(11);
+				cout << student[i].att[j] << ": Present" << endl;
 			}
 		}
 		cout << endl;
@@ -154,7 +154,7 @@ void ExportAttendance()
 		getline(fin, student[i].bonus);
 		getline(fin, student[i].total);
 		for (int j = 0; j < 10; j++)
-			getline(fin, student[i].att[j].day);
+			getline(fin, student[i].att[j]);
 		getline(fin, temp);
 		fin.ignore(1, '\n');
 	}
@@ -165,15 +165,35 @@ void ExportAttendance()
 	int pos = filename.find(".txt");
 	filename.erase(pos);
 	filename += ".csv";
-	fout.open(filename, ios::in || ios::out || ios::trunc);
-	fout << "No, Student ID, Full name, Class, Day, Attendance" << endl;
+	fout.open(filename, ios::in | ios::out | ios::trunc);
+	fout << "No,Student ID,Full name,Class,";
+	string def;
+	for (int j = 0; j < 10; j++)
+	{
+		def = student[0].att[j];
+		def.resize(10);
+		fout << def << ",";
+	}
+	fout << endl;
 	for (int i = 0; i < n; i++)
 	{
-		fout << i+1 << ", " << student[i].id << ", " << student[i].name <<
-			", " << student[i].Class 
+		fout << i + 1 << "," << student[i].id << "," << student[i].name <<
+			"," << student[i].Class << ",";
+		bool last = false;
+		for (int j = 0; j < 10; j++)
+		{
+			if (j == 9)
+				last = true;
+			int length = student[i].att[j].length();
+			if (student[i].att[j][length - 1] == '1')
+				fout << "Absent";
+			else fout << "Present";
+			if (last)
+				fout << endl;
+			else fout << ",";
+		}
 	}
 	fout.close();
-	
 	delete[] student;
 }
 void ViewStudentList()
@@ -218,7 +238,7 @@ void ViewStudentList()
 		getline(fin, student[i].bonus);
 		getline(fin, student[i].total);
 		for (int j = 0; j < 10; j++)
-			getline(fin, student[i].att[j].day);
+			getline(fin, student[i].att[j]);
 		getline(fin, temp);
 		fin.ignore(1, '\n');
 	}
