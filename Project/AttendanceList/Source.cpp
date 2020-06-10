@@ -15,9 +15,11 @@ struct Date
 	string month;
 	string year;
 };
+
 struct Attendance {
 	string day;
 };
+
 struct Student
 {
 	string id, password, name, DoB, Class, status,midterm,final,bonus,total;
@@ -112,6 +114,7 @@ void ViewAttendance()
 	fin.close();
 	delete[] student;
 }
+
 void ExportAttendance()
 {
 	//2019-2020-HK2-19APCS1-CM101-Student.txt
@@ -196,6 +199,7 @@ void ExportAttendance()
 	fout.close();
 	delete[] student;
 }
+
 void ViewStudentList()
 {
 	//2019-2020-HK2-19APCS1-CM101-Student.txt
@@ -245,6 +249,7 @@ void ViewStudentList()
 	fin.close();
 	delete[] student;
 }
+
 int main()
 {
 	//ViewAttendance();
