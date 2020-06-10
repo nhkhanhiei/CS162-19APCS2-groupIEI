@@ -1,4 +1,4 @@
-2
+3
 1912799
 20010401
 Super Star
@@ -10,6 +10,13 @@ Super Star
 20011028
 Nguyen Hoang Khanh
 2001 10 28
+19CLC10
+0
+
+19127002
+20200402
+Nguyen Van 2
+2020 04 02
 19CLC10
 1
 
