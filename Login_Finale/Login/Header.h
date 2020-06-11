@@ -9,7 +9,7 @@ using namespace std;
 struct Date {
 	int day, month, year;
 };
-
+// Account database
 struct Student
 {
 	int id = 0;
@@ -35,13 +35,35 @@ struct Staff {
 	int gend;
 };
 
-void NhapSVtuFile(Student*& a, int& n);
-void Doc(Student a[], int n);
-void Login(Student a[], int n);
-void ManHinhChinh(Student a[], int n);
-void MenuSinhVien(Student a[], int n, int i);
-void SettingSV(Student a[], int n, int i);
-void CapNhatPassSV(Student a[], int n, string newpass, int index);
+// GUI
+void Login(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2);
+void ManHinhChinh(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2);
+void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+
+void SettingSV(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+void SettingStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+void SettingLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+
 string ChangePassword(string oldpass);
 
+// Student function
+void NhapSVtuFile(Student*& a, int& n);
+void Doc(Student a[], int n);
+void CapNhatPassSV(Student a[], int n, string newpass, int index);
+void StudentProfile(Student a[], int n, int i);
+
+// Staff function
+void NhapStafftuFile(Staff*& a, int& n);
+void DocStaff(Staff a[], int n);
+void StaffProfile(Staff b[], int n1, int i);
+void CapNhatPassStaff(Staff a[], int n, string newpass, int index);
+
+
+//Lecturer functions
+void NhapLecturertuFile(Lecturer*& c, int& n2);
+void DocLecturer(Lecturer c[], int n2);
+void LecturerProfile(Lecturer c[], int n2, int i);
+void CapNhatPassLecturer(Lecturer a[], int n, string newpass, int index);
 #endif
