@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "View_Scoreboard", "View_Sco
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Export_Scoreboard", "Export_Scoreboard\Export_Scoreboard.vcxproj", "{E0FBBDBD-27CB-45CC-A5B1-3A02EC72B50D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Import_Scoreboard", "Import_Scoreboard\Import_Scoreboard.vcxproj", "{140110AA-F2E0-4072-B8FC-0B665F310A60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{E0FBBDBD-27CB-45CC-A5B1-3A02EC72B50D}.Release|x64.Build.0 = Release|x64
 		{E0FBBDBD-27CB-45CC-A5B1-3A02EC72B50D}.Release|x86.ActiveCfg = Release|Win32
 		{E0FBBDBD-27CB-45CC-A5B1-3A02EC72B50D}.Release|x86.Build.0 = Release|Win32
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Debug|x64.ActiveCfg = Debug|x64
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Debug|x64.Build.0 = Debug|x64
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Debug|x86.ActiveCfg = Debug|Win32
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Debug|x86.Build.0 = Debug|Win32
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Release|x64.ActiveCfg = Release|x64
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Release|x64.Build.0 = Release|x64
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Release|x86.ActiveCfg = Release|Win32
+		{140110AA-F2E0-4072-B8FC-0B665F310A60}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
