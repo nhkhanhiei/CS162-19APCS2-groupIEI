@@ -532,7 +532,7 @@ void CheckIn()
 	getline(cin, temp);
 	filename += '-' + temp + "-Student.txt";
 	fstream fin;
-	fin.open("2019-2020-HK2-19APCS1-CS162-Student.txt", ios::in | ios::out);
+	fin.open(filename, ios::in | ios::out);
 	if (fin.fail())
 	{
 		cout << "Can't open the course file!";
@@ -653,6 +653,253 @@ void CheckIn()
 	fout.close();
 	delete[] student;
 }
+void ViewCheckIn()
+{
+	string name;
+	string temp, filename;
+	cout << "Please enter your name: ";
+	getline(cin, name);
+	cout << "Please enter the information of the course whose check-in results you need : " << endl;
+	cout << "Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	cout << "Semester: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Class: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Course ID: ";
+	getline(cin, temp);
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open(filename, ios::in | ios::out);
+	if (fin.fail())
+	{
+		cout << "Can't open the course file!";
+		fin.close();
+		return;
+	}
+	int n;
+	fin >> n;
+	fin.ignore();
+	Student* student = new Student[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		getline(fin, student[i].id);
+		getline(fin, student[i].password);
+		getline(fin, student[i].name);
+		getline(fin, student[i].DoB);
+		getline(fin, student[i].Class);
+		getline(fin, student[i].status);
+		getline(fin, student[i].midterm);
+		getline(fin, student[i].final);
+		getline(fin, student[i].bonus);
+		getline(fin, student[i].total);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
+		getline(fin, temp);
+		fin.ignore(1, '\n');
+	}
+
+	//Get student
+	int pos = -1;
+	for (int i = 0; i < n; i++)
+	{
+		if (student[i].name == name)
+			pos = i;
+	}
+	if (student[pos].status == "0")
+	{
+		cout << "You have been removed from the course" << endl;
+		fin.close();
+		delete[] student;
+		return;
+	}
+	if (pos == -1)
+	{
+		cout << "Your name doesn't exist in the list of students studying this course" << endl;
+		fin.close();
+		delete[] student;
+		return;
+	}
+	cout << "Your check-in results: " << endl;
+	for (int j = 0; j < 10; j++)
+	{
+		int length = student[pos].att[j].length();
+		if (student[pos].att[j][length - 1] == '1')
+		{
+			student[pos].att[j].resize(11);
+			cout << student[pos].att[j] << ": Absent" << endl;
+		}
+		else
+		{
+			student[pos].att[j].resize(11);
+			cout << student[pos].att[j] << ": Present" << endl;
+		}
+	cout << endl;
+	}
+	fin.close();
+	delete[] student;
+}
+void ViewSchedules()
+{
+	string temp, filename;
+	cout << "Please enter the information of the course: " << endl;
+	cout << "Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	cout << "Semester: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Class: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Course ID: ";
+	getline(cin, temp);
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open(filename, ios::in | ios::out);
+	if (fin.fail())
+	{
+		cout << "Can't open the course file!";
+		fin.close();
+		return;
+	}
+	int n;
+	fin >> n;
+	fin.ignore();
+	Student student;
+	getline(fin, student.id);
+	getline(fin, student.password);
+	getline(fin, student.name);
+	getline(fin, student.DoB);
+	getline(fin, student.Class);
+	getline(fin, student.status);
+	getline(fin, student.midterm);
+	getline(fin, student.final);
+	getline(fin, student.bonus);
+	getline(fin, student.total);
+	for (int j = 0; j < 10; j++)
+		getline(fin, student.att[j]);
+	
+	Schedule days;
+	//Get hour and min
+	string temptime;
+	temp = student.att[0];
+	int length = temp.length();
+	int countspace = 0;
+	bool next = false;
+	for (int i = 11; i < length; i++)
+	{
+		if (temp[i] == ' ')
+		{
+			countspace++;
+			switch (countspace)
+			{
+			case 1: days.startHour = stoi(temptime); temptime.clear(); break;
+			case 2: days.startMin = stoi(temptime); temptime.clear(); break;
+			case 3: days.endHour = stoi(temptime); temptime.clear(); break;
+			case 4: days.endMin = stoi(temptime); temptime.clear(); break;
+			}
+			continue;
+		}
+		temptime += temp[i];
+	}
+
+	//Get day,month,year
+	for (int i = 0; i < 10; i++)
+	{
+		temp = student.att[i];
+		days.day[i].year = stoi(temp.substr(0, 4));
+		days.day[i].month = stoi(temp.substr(5, 2));
+		days.day[i].day = stoi(temp.substr(8, 2));
+	}
+	cout << "You have classes on these following days from " << days.startHour << ":" << days.startMin << " to " <<
+	days.endHour << ":" << days.endMin << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		cout << days.day[i].day << "/" << days.day[i].month << "/" << days.day[i].year << endl;
+	}
+	fin.close();
+}
+//Student
+void ViewScore()
+{
+	string name;
+	string temp, filename;
+	cout << "Please enter your name: ";
+	getline(cin, name);
+	cout << "Please enter the information of the course whose scores you need : " << endl;
+	cout << "Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	cout << "Semester: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Class: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Course ID: ";
+	getline(cin, temp);
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open(filename, ios::in | ios::out);
+	if (fin.fail())
+	{
+		cout << "Can't open the course file!";
+		fin.close();
+		return;
+	}
+	int n;
+	fin >> n;
+	fin.ignore();
+	Student* student = new Student[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		getline(fin, student[i].id);
+		getline(fin, student[i].password);
+		getline(fin, student[i].name);
+		getline(fin, student[i].DoB);
+		getline(fin, student[i].Class);
+		getline(fin, student[i].status);
+		getline(fin, student[i].midterm);
+		getline(fin, student[i].final);
+		getline(fin, student[i].bonus);
+		getline(fin, student[i].total);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
+		getline(fin, temp);
+		fin.ignore(1, '\n');
+	}
+
+	//Get student
+	int pos = -1;
+	for (int i = 0; i < n; i++)
+	{
+		if (student[i].name == name)
+			pos = i;
+	}
+	if (student[pos].status == "0")
+	{
+		cout << "You have been removed from the course" << endl;
+		fin.close();
+		delete[] student;
+		return;
+	}
+	if (pos == -1)
+	{
+		cout << "Your name doesn't exist in the list of students studying this course" << endl;
+		fin.close();
+		delete[] student;
+		return;
+	}
+	
+	cout << "Your scores of this course: " << endl;
+	cout << "Midterm: " << student[pos].midterm << endl;
+	cout << "Final: " << student[pos].final << endl;
+	cout << "Bonus: " << student[pos].bonus << endl;
+	cout << "Total: " << student[pos].total << endl;
+	fin.close();
+	delete[] student;
+}
 int main()
 {
 	//ViewAttendance();
@@ -660,6 +907,9 @@ int main()
 	//ViewStudentList();
 	//EditAttendance();
 	//EditGrade();
-	CheckIn();
+	//CheckIn();
+	//ViewCheckIn();
+	//ViewSchedules();
+	ViewScore();
 	return 0;
 }
