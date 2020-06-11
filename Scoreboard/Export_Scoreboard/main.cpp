@@ -54,7 +54,7 @@ void viewScoreboard()
 {
 	string temp, filename;
 
-	cout << "Input attendance list you would like to see: \n" << endl;
+	cout << "Input scoreboard you would like to see: \n" << endl;
 	cout << "   Year(yyyy-yyyy): ";
 	getline(cin, filename);
 	for_each(filename.begin(), filename.end(), toUpper);
@@ -148,7 +148,7 @@ void exportScoreboard()
 {
 	string temp, filename;
 
-	cout << "Input attendance list you would like to export: \n" << endl;
+	cout << "Input scoreboard you would like to export: \n" << endl;
 	cout << "   Year(yyyy-yyyy): ";
 	getline(cin, filename);
 	for_each(filename.begin(), filename.end(), toUpper);
