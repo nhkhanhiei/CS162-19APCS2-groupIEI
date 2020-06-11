@@ -9,39 +9,26 @@
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
-struct Date
+struct Dates
 {
-	string day;
-	string month;
-	string year;
+	int day;
+	int month;
+	int year;
 };
-struct Attendance {
-	string day;
-};
+
 struct Student
 {
 	string id, password, name, DoB, Class, status,midterm,final,bonus,total;
 	string att[11];
 };
 
-struct CourseData
+struct Schedule
 {
-	int id;
-	string courseID;
-	string courseName;
-	string Class;
-	string lecturerUsername;
-	string lecturerName;
-	string lecturerDegree;
-	string lecturerGender;
-	string startDate;
-	string endDate;
-	string dayStudy;
+	Dates day[11];
 	int startHour;
 	int startMin;
 	int endHour;
 	int endMin;
-	string lectureRoom;
 };
 
 void ViewAttendance()
@@ -58,7 +45,7 @@ void ViewAttendance()
 	cout << "Class: ";
 	getline(cin, temp);
 	filename += '-' + temp;
-	cout << "Course name: ";
+	cout << "Course ID: ";
 	getline(cin, temp);
 	filename += '-' + temp + "-Student.txt" ;
 	fstream fin;
@@ -126,7 +113,7 @@ void ExportAttendance()
 	cout << "Class: ";
 	getline(cin, temp);
 	filename += '-' + temp;
-	cout << "Course name: ";
+	cout << "Course ID: ";
 	getline(cin, temp);
 	filename += '-' + temp + "-Student.txt";
 	fstream fin;
@@ -219,7 +206,7 @@ void ViewStudentList()
 	cout << "Class: ";
 	getline(cin, temp);
 	filename += '-' + temp;
-	cout << "Course name: ";
+	cout << "Course ID: ";
 	getline(cin, temp);
 	filename += '-' + temp + "-Student.txt";
 	fstream fin;
@@ -273,7 +260,7 @@ void EditAttendance()
 	cout << "Class: ";
 	getline(cin, temp);
 	filename += '-' + temp;
-	cout << "Course name: ";
+	cout << "Course ID: ";
 	getline(cin, temp);
 	filename += '-' + temp + "-Student.txt";
 
@@ -380,7 +367,7 @@ void EditAttendance()
 		fout << student[i].total << endl;
 		for (int j = 0; j < 10; j++)
 			fout << student[i].att[j] << endl;
-		fout << 1 << endl;
+		fout << 1 << endl << endl;
 	}
 	fin.close();
 	fout.close();
@@ -494,8 +481,174 @@ void EditGrade()
 		fout << student[i].total << endl;
 		for (int j = 0; j < 10; j++)
 			fout << student[i].att[j] << endl;
-		fout << 1 << endl;
+		fout << 1 << endl << endl;
 	}
+	fin.close();
+	fout.close();
+	delete[] student;
+}
+//To see if the present time is one of the 9 periods in the file
+int CheckTime(Schedule days) // return the position of that period in the periods(day) array or -1 if false
+{
+	time_t now = time(0);
+	tm* time = localtime(&now);
+	time->tm_year += 1900;
+	time->tm_mon++;
+	for (int i = 0; i < 10; i++)
+	{
+		if (days.day[i].day == time->tm_mday && days.day[i].month == time->tm_mon && days.day[i].year == time->tm_year)
+		{
+			if (time->tm_hour >= days.startHour && time->tm_hour <= days.endHour)
+			{
+				if (time->tm_hour == days.endHour)
+				{
+					if (time->tm_min <= days.endMin)
+						return i;
+					else return -1;
+				}
+				else return i;
+			}
+		}
+
+	}
+	return -1;
+}
+void CheckIn()
+{
+	string name;
+	string temp, filename;
+	cout << "Please enter your name: ";
+	getline(cin, name);
+	cout << "Please enter the information of the course you are checking in : " << endl;
+	cout << "Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	cout << "Semester: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Class: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Course ID: ";
+	getline(cin, temp);
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open("2019-2020-HK2-19APCS1-CS162-Student.txt", ios::in | ios::out);
+	if (fin.fail())
+	{
+		cout << "Can't open the course file!";
+		fin.close();
+		return;
+	}
+	int n;
+	fin >> n;
+	fin.ignore();
+	Student* student = new Student[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		getline(fin, student[i].id);
+		getline(fin, student[i].password);
+		getline(fin, student[i].name);
+		getline(fin, student[i].DoB);
+		getline(fin, student[i].Class);
+		getline(fin, student[i].status);
+		getline(fin, student[i].midterm);
+		getline(fin, student[i].final);
+		getline(fin, student[i].bonus);
+		getline(fin, student[i].total);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
+		getline(fin, temp);
+		fin.ignore(1, '\n');
+	}
+
+	//Get student
+	int pos = -1;
+	for (int i = 0; i < n; i++)
+	{
+		if (student[i].name == name)
+			pos = i;
+	}
+	if (student[pos].status == "0")
+	{
+		cout << "You have been removed from the course" << endl;
+		fin.close();
+		delete[] student;
+		return;
+	}
+	if (pos == -1)
+	{
+		cout << "Your name doesn't exist in the list of students studying this course" << endl;
+		fin.close();
+		delete[] student;
+		return;
+	}
+	Schedule days;
+	//Get hour and min
+	string temptime;
+	temp = student[0].att[0];
+	int length = temp.length();
+	int countspace = 0;
+	bool next = false;
+	for (int i = 11; i < length; i++)
+	{
+		if (temp[i] == ' ')
+		{
+			countspace++;
+			switch (countspace)
+			{
+			case 1: days.startHour = stoi(temptime); temptime.clear(); break;
+			case 2: days.startMin = stoi(temptime); temptime.clear(); break;
+			case 3: days.endHour = stoi(temptime); temptime.clear(); break;
+			case 4: days.endMin = stoi(temptime); temptime.clear(); break;
+			}
+			continue;
+		}
+		temptime += temp[i];
+	}
+
+	//Get day,month,year
+	for (int i = 0; i < 10; i++)
+	{
+		temp = student[pos].att[i];
+		days.day[i].year = stoi(temp.substr(0, 4));
+		days.day[i].month = stoi(temp.substr(5, 2));
+		days.day[i].day = stoi(temp.substr(8, 2));
+	}
+	
+	int tpos = CheckTime(days);
+	if (tpos == -1)
+		cout << "There is currently no class to check in" << endl;
+	else {
+		student[pos].att[tpos][length-1] = '0';
+	}
+	fstream fout;
+	fout.open(filename, ios::out);
+	if (fout.fail())
+	{
+		cout << "Can't open destination file!" << endl;
+		fin.close();
+		fout.close();
+		delete[] student;
+		return;
+	}
+	fout << n << endl;
+	for (int i = 0; i < n; i++)
+	{
+		fout << student[i].id << endl;
+		fout << student[i].password << endl;
+		fout << student[i].name << endl;
+		fout << student[i].DoB << endl;
+		fout << student[i].Class << endl;
+		fout << student[i].status << endl;
+		fout << student[i].midterm << endl;
+		fout << student[i].final << endl;
+		fout << student[i].bonus << endl;
+		fout << student[i].total << endl;
+		for (int j = 0; j < 10; j++)
+			fout << student[i].att[j] << endl;
+		fout << 1 << endl << endl;
+	}
+	cout << "Checked in successfully" << endl;
 	fin.close();
 	fout.close();
 	delete[] student;
@@ -506,6 +659,7 @@ int main()
 	//ExportAttendance();
 	//ViewStudentList();
 	//EditAttendance();
-	EditGrade();
+	//EditGrade();
+	CheckIn();
 	return 0;
 }
