@@ -1,5 +1,5 @@
 #include "Header.h"
-
+#include "HeaderStaffClass.h"
 
 void NhapSVtuFile(Student*& a, int& n) {
 	fstream file;
@@ -125,6 +125,86 @@ void CapNhatPassSV(Student a[], int n, string newpass, int index) {
 		}
 	}
 	file.close();
+
+	string fileName = "Student-" + a[index].classes + ".txt";
+	file.open(fileName, ios::in);
+
+	if (file.fail())
+	{
+		cout << "Unable to read Student file!" << endl;
+		file.close();
+	}
+	else
+	{
+		int z;
+		file >> z;
+
+		int count = 0;
+		int tempDay = 0;
+		int tempMonth = 0;
+		int tempYear = 0;
+		string temp;
+
+		StudentClass* sOfClass;
+		sOfClass = new StudentClass[z];
+
+		for (int i = 0; i < z; i++)
+		{
+			temp = "";
+			file >> sOfClass[i].id;
+			file.ignore();
+			getline(file, sOfClass[i].password);
+			getline(file, sOfClass[i].fullname);
+			file >> tempYear >> tempMonth >> tempDay;
+			file.ignore();
+			if (tempDay < 10)
+			{
+				sOfClass[i].dob.day += '0';
+			}
+			sOfClass[i].dob.day += to_string(tempDay);
+
+			if (tempMonth < 10)
+			{
+				sOfClass[i].dob.month += '0';
+			}
+			sOfClass[i].dob.month += to_string(tempMonth);
+
+			if (tempYear < 10)
+				sOfClass[i].dob.year += "000";
+			else if (tempYear < 100)
+				sOfClass[i].dob.year += "00";
+			else if (tempYear < 1000)
+				sOfClass[i].dob.year += '0';
+			sOfClass[i].dob.year += to_string(tempYear);
+
+			getline(file, temp);
+			file >> sOfClass[i].status;
+			file.ignore();
+		}
+
+		file.close();
+
+		file.open(fileName, ios::out);
+		file << z << "\n";
+		for (int i = 0; i < z; i++)
+		{
+			if (sOfClass[i].id == a[index].id)
+			{
+				sOfClass[i].password = newpass;
+			}
+			file << sOfClass[i].id;
+			file << "\n";
+			file << sOfClass[i].password;
+			file << "\n";
+			file << sOfClass[i].fullname << "\n";
+			file << sOfClass[i].dob.year << " " << sOfClass[i].dob.month << " " << sOfClass[i].dob.day << "\n";
+			file << a[index].classes << "\n";
+			file << sOfClass[i].status;
+			file << "\n\n";
+		}
+		file.close();
+		delete[] sOfClass;
+	}
 }
 
 string ChangePassword(string oldpass) {

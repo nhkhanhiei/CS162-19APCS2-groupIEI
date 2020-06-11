@@ -1,4 +1,4 @@
-5
+7
 19126001
 20010401
 Trinh Van Minh
@@ -7,7 +7,7 @@ Trinh Van Minh
 1
 
 19127002
-20020101
+khoa1545560
 Do Vuong Phuc Hoi Nhieu
 2002 01 01
 19CLC5
@@ -25,11 +25,25 @@ Super Star
 Nguyen Van 1
 2020 04 01
 19APCS1
-1
+0
 
 19127002
 20200402
 Nguyen Van 2
 2020 04 02
 19APCS1
+1
+
+69966996
+20010719
+Khoa Dau Buoi
+2001 07 19
+19APCS1
+1
+
+123456
+20010219
+Khoa
+2001 02 19
+19CLC5
 1

@@ -1,4 +1,5 @@
 #include "Header.h"
+#include "HeaderStaffClass.h"
 
 void ManHinhChinh(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2)
 {
@@ -140,6 +141,9 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 	} while (choice < 1 || choice>7);
 	switch (choice)
 	{
+	case 1:
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
 	case 6:
 		SettingStaff(a, n, b, n1, c, n2, i);
 		break;
@@ -150,6 +154,140 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 		break;
 	}
 }
+
+//viet ham sua tren ca 2 file;
+void MenuStaffClass(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
+{
+	int choice; char choice1;
+	system("cls");
+	cout << "******************************************" << endl;
+	cout << "-------------------Class------------------" << endl;
+	cout << "       1. Import Students of a class" << endl;
+	cout << "       2. Add new Student" << endl;
+	cout << "       3. Edit a Student" << endl;
+	cout << "       4. Remove a Student" << endl;
+	cout << "       5. Exchange Student between two classes" << endl;
+	cout << "       6. View list of classes" << endl;
+	cout << "       7. View list of Students in a class" << endl;
+	cout << "       8. Return" << endl;
+	cout << "******************************************" << endl;
+	do
+	{
+		cout << "Enter your choice (1-9): ";
+		cin >> choice;
+		if (choice < 1 || choice>8)
+			cout << "Wrong choice! Please retry" << endl;
+	} while (choice < 1 || choice>8);
+
+	switch (choice)
+	{
+	case 1:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		importClass();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 2:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		addStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 3:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		editStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 4:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		removeStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 5:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		changeClassStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 6:
+		system("cls");
+		viewClass();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 7:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		viewStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+		
+	case 8:
+		MenuStaff(a, n, b, n1, c, n2,i);
+		break;
+	default:
+		break;
+	}
+}
+
+
 
 void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
 {
@@ -354,3 +492,4 @@ void SettingLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2
 		break;
 	}
 }
+
