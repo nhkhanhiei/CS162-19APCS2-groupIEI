@@ -72,7 +72,7 @@ void viewScoreboard()
 	string f3 = temp;
 	filename += '-' + temp;
 
-	cout << "   Course name: ";
+	cout << "   Course ID: ";
 	getline(cin, temp);
 	for_each(temp.begin(), temp.end(), toUpper);
 	string f4 = temp;
@@ -166,7 +166,7 @@ void exportScoreboard()
 	string f3 = temp;
 	filename += '-' + temp;
 
-	cout << "   Course name: ";
+	cout << "   Course ID: ";
 	getline(cin, temp);
 	for_each(temp.begin(), temp.end(), toUpper);
 	string f4 = temp;
