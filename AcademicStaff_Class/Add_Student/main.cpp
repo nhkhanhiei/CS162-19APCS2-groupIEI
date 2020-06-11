@@ -64,8 +64,12 @@ int viewClass()
 
 int viewStudent()
 {
-	viewClass();
-	cout << "Input class you want to view: " << flush;
+	int confirm;
+	confirm = viewClass();
+	if (confirm == -1)
+		return -1;
+
+	cout << "\nInput class you want to view: " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -156,8 +160,12 @@ int viewStudent()
 
 void addStudent()
 {
-	viewClass();
-	cout << "Input class of new student: " << flush;
+	int confirm;
+	confirm = viewClass();
+	if (confirm == -1)
+		return;
+
+	cout << "\nInput class of new student: " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -292,7 +300,7 @@ void addStudent()
 			file << sOfClass[i].status;
 			file << "\n\n";
 		}
-		cout << "Add a new student successfully!" << endl;
+		cout << "\nAdd a new student successfully!" << endl;
 		delete[] sOfClass;
 		file.close();
 	}

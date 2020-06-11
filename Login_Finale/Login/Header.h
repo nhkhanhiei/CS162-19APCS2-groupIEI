@@ -40,7 +40,8 @@ void Doc(Student a[], int n);
 void Login(Student a[], int n);
 void ManHinhChinh(Student a[], int n);
 void MenuSinhVien(Student a[], int n, int i);
-
-
+void SettingSV(Student a[], int n, int i);
+void CapNhatPassSV(Student a[], int n, string newpass, int index);
+string ChangePassword(string oldpass);
 
 #endif

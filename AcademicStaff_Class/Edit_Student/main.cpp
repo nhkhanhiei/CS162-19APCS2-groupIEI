@@ -69,7 +69,7 @@ int viewStudent()
 	if (confirm == -1)
 		return -1;
 
-	cout << "Input class you want to view: " << flush;
+	cout << "\nInput class you want to view: " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -165,7 +165,7 @@ void addStudent()
 	if (confirm == -1)
 		return;
 
-	cout << "Input class of new student: " << flush;
+	cout << "\nInput class of new student: " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -300,7 +300,7 @@ void addStudent()
 			file << sOfClass[i].status;
 			file << "\n\n";
 		}
-		cout << "Add a new student successfully!" << endl;
+		cout << "\nAdd a new student successfully!" << endl;
 		delete[] sOfClass;
 		file.close();
 	}
@@ -312,7 +312,7 @@ void removeStudent()
 	confirm = viewClass();
 	if (confirm == -1)
 		return;
-	cout << "Input class of student about to remove : " << flush;
+	cout << "\nInput class of student about to remove : " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -414,11 +414,11 @@ void removeStudent()
 				{
 					sOfClass[i].status = 0;
 					check++;
-					cout << "Remove student successfully!" << endl;
+					cout << "\nRemove student successfully!" << endl;
 				}
 				else
 				{
-					cout << "Remove student fail!" << endl;
+					cout << "\nRemove student fail!" << endl;
 					check--;
 				}
 			}
@@ -461,7 +461,7 @@ void editStudent()
 	confirm = viewClass();
 	if (confirm == -1)
 		return;
-	cout << "Input class of student about to edit : " << flush;
+	cout << "\nInput class of student about to edit : " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -565,37 +565,37 @@ void editStudent()
 				if (choice == 1)
 				{
 					int editID;
-					cout << "Input new ID: " << flush;
+					cout << "\nInput new ID: " << flush;
 					cin >> editID;
 					if (editID == sOfClass[i].id)
 					{
-						cout << "Old and new ID are the same!" << endl;
+						cout << "\nOld and new ID are the same!" << endl;
 						check--;
 						break;
 					}
 					sOfClass[i].id = editID;
 					check++;
-					cout << "Edit student successfully!" << endl;
+					cout << "\nEdit student successfully!" << endl;
 				}
 				if (choice == 2)
 				{
 					string editName;
-					cout << "Input new name: " << flush;
+					cout << "\nInput new name: " << flush;
 					cin.ignore();
 					getline(cin, editName);
 					if (editName == sOfClass[i].fullname)
 					{
-						cout << "Old and new name are the same!" << endl;
+						cout << "\nOld and new name are the same!" << endl;
 						check--;
 						break;
 					}
 					sOfClass[i].fullname = editName;
 					check++;
-					cout << "Edit student successfully!" << endl;
+					cout << "\nEdit student successfully!" << endl;
 				}
 				if (choice == 3)
 				{
-					cout << "Input new DOB: " << endl;
+					cout << "\nInput new DOB: " << endl;
 
 					cout << "   day: " << flush;
 					int editDay;
@@ -631,7 +631,7 @@ void editStudent()
 
 					if (sOfClass[i].dob.day == stringeditDay && sOfClass[i].dob.month == stringeditMonth && sOfClass[i].dob.year == stringeditYear)
 					{
-						cout << "Old and new DOB are the same!" << endl;
+						cout << "\nOld and new DOB are the same!" << endl;
 						check--;
 						break;
 					}
@@ -639,11 +639,11 @@ void editStudent()
 					sOfClass[i].dob.month = stringeditMonth;
 					sOfClass[i].dob.day = stringeditDay;
 					check++;
-					cout << "Edit student successfully!" << endl;
+					cout << "\nEdit student successfully!" << endl;
 				}
 				if (choice == 4)
 				{
-					cout << "You want to activate/deactivate this student? (1: Active, 0: Inactive): " << flush;
+					cout << "\nYou want to activate/deactivate this student? (1: Active, 0: Inactive): " << flush;
 					int editAct;
 					do
 					{
@@ -651,18 +651,18 @@ void editStudent()
 					} while (editAct != 1 and editAct != 0);
 					if (sOfClass[i].status == editAct)
 					{
-						cout << "Old and new status are the same!" << endl;
+						cout << "\nOld and new status are the same!" << endl;
 						check--;
 						break;
 					}
 					sOfClass[i].status = editAct;
 					check++;
-					cout << "Edit student successfully!" << endl;
+					cout << "\nEdit student successfully!" << endl;
 				}
 			}
 		}
 		if (check == 0)
-			cout << "This student is not in the list!" << endl;
+			cout << "\nThis student is not in the list!" << endl;
 
 		file.close();
 

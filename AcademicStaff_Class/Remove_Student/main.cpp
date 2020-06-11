@@ -64,8 +64,12 @@ int viewClass()
 
 int viewStudent()
 {
-	viewClass();
-	cout << "Input class you want to view: " << flush;
+	int confirm;
+	confirm = viewClass();
+	if (confirm == -1)
+		return -1;
+
+	cout << "\nInput class you want to view: " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -156,8 +160,12 @@ int viewStudent()
 
 void addStudent()
 {
-	viewClass();
-	cout << "Input class of new student: " << flush;
+	int confirm;
+	confirm = viewClass();
+	if (confirm == -1)
+		return;
+
+	cout << "\nInput class of new student: " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -292,7 +300,7 @@ void addStudent()
 			file << sOfClass[i].status;
 			file << "\n\n";
 		}
-		cout << "Add a new student successfully!" << endl;
+		cout << "\nAdd a new student successfully!" << endl;
 		delete[] sOfClass;
 		file.close();
 	}
@@ -300,8 +308,11 @@ void addStudent()
 
 void removeStudent()
 {
-	viewClass();
-	cout << "Input class of student about to remove : " << flush;
+	int confirm;
+	confirm = viewClass();
+	if (confirm == -1)
+		return;
+	cout << "\nInput class of student about to remove : " << flush;
 	string cl;
 	cin >> cl;
 	for_each(cl.begin(), cl.end(), toUpper);
@@ -323,7 +334,6 @@ void removeStudent()
 		int z;
 		file >> z;
 
-		int count = 0;
 		int tempDay = 0;
 		int tempMonth = 0;
 		int tempYear = 0;
@@ -364,9 +374,6 @@ void removeStudent()
 			getline(file, temp);
 			file >> sOfClass[i].status;
 			file.ignore();
-
-			if (sOfClass[i].status == 1)
-				count += 1;
 		}
 
 		cout << "List of students: \n" << endl;
@@ -383,8 +390,6 @@ void removeStudent()
 				cout << " (Active)" << endl;
 			cout << "\n";
 		}
-
-		cout << "Number of active student(s) (able to remove): " << count << endl;
 
 		int tempID;
 		int check = 0;
@@ -409,11 +414,11 @@ void removeStudent()
 				{
 					sOfClass[i].status = 0;
 					check++;
-					cout << "Remove student successfully!" << endl;
+					cout << "\nRemove student successfully!" << endl;
 				}
 				else
 				{
-					cout << "Remove student fail!" << endl;
+					cout << "\nRemove student fail!" << endl;
 					check--;
 				}
 			}

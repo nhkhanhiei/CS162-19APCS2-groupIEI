@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{227b76f8-b4cf-4461-8d47-96f05fd0a627}</ProjectGuid>
-    <RootNamespace>ViewScoreboard</RootNamespace>
+    <ProjectGuid>{65218287-eea2-42cb-8cc8-85b5176a6c93}</ProjectGuid>
+    <RootNamespace>ViewScoreboardLecturer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
