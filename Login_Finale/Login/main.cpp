@@ -41,7 +41,25 @@ void Doc(Student a[], int n) {
 		cout << "Student ID: " << a[i].id << endl;
 		cout << "Password: " << a[i].password << endl;
 		cout << "Name: " << a[i].fullname << endl;
-		cout << "Birthday: " << a[i].dob.day << "/" << a[i].dob.month << "/" << a[i].dob.year << endl;
+		//cout << "Birthday: " << a[i].dob.day << "/" << a[i].dob.month << "/" << a[i].dob.year << endl;
+		cout << "Birthday: ";
+		if (a[i].dob.day < 10)
+		{
+			cout << "0" << a[i].dob.day << "/";
+		}
+		else
+		{
+			cout << a[i].dob.day << "/";
+		}
+		if (a[i].dob.month < 10)
+		{
+			cout << "0" << a[i].dob.month << "/";
+		}
+		else
+		{
+			cout << a[i].dob.month << "/";
+		}
+		cout << a[i].dob.year << endl;
 		cout << "Class: " << a[i].classes << endl;
 		cout << "Status: " << a[i].status;
 		if (a[i].status == 0)
@@ -56,35 +74,25 @@ void Login(Student a[], int n) {
 	string id; string pass;
 	
 	cout << "Username: "; cin >> id;
-	cout << "Password: "; cin >> pass;
-	
+	cout << "Password: "; cin >> pass; 
+	int check = 0;
 	for (int i = 0; i < n; i++)
 	{
-		int check = 0;
+		
 		if (a[i].id == stoi(id) && pass.compare(a[i].password) == 0) {
-			/*cout << i + 1 << ". " << endl;
-			cout << "Student ID: " << a[i].id << endl;
-			cout << "Password: " << a[i].password << endl;
-			cout << "Name: " << a[i].fullname << endl;
-			cout << "Birthday: " << a[i].dob.day << "/" << a[i].dob.month << "/" << a[i].dob.year << endl;
-			cout << "Class: " << a[i].classes << endl;
-			cout << "Status: " << a[i].status;
-			if (a[i].status == 0)
-				cout << " (Inactive)" << endl;
-			else
-				cout << " (Active)" << endl;
-			cout << "\n";*/
+			
 			check = 1;
 			MenuSinhVien(a, n, i);
-			return;
-		}
-		else {
-			system("cls");
-			cout << "Sai ten dang nhap hoac mat khau!! Yeu cau dang Nhap lai!!" << endl;
-			Login(a, n);
 			break;
 		}
 	}
+	if (check == 0)
+	{
+		system("cls");
+		cout << "Sai ten dang nhap hoac mat khau!! Yeu cau dang Nhap lai!!" << endl;
+		Login(a, n);
+	}
+	
 }
 
 void ManHinhChinh(Student a[], int n)
@@ -109,7 +117,10 @@ void ManHinhChinh(Student a[], int n)
 		Login(a, n);
 		break;
 	case 2:
-		cout << "Hen gap lai!!" << endl;
+		system("cls");
+		cout << "******************************************************************************" << endl;
+		cout << "----------------------HEN GAP LAI, GOODBYE FOR NOW!!<3------------------------" << endl;
+		cout << "******************************************************************************" << endl;
 		exit;
 	}
 
@@ -136,6 +147,8 @@ void MenuSinhVien(Student a[], int n, int i) {
 	switch (choice)
 	{
 	case 6:
+		SettingSV(a, n, i);
+		break;
 	case 7:
 		ManHinhChinh(a, n);
 		break;
@@ -145,22 +158,196 @@ void MenuSinhVien(Student a[], int n, int i) {
 }
 
 void SettingSV(Student a[], int n, int i) {
+	int choice; string npass; char choice1;
 	system("cls");
 	cout << "******************************************" << endl;
 	cout << "       1. Thong tin ca nhan" << endl;
 	cout << "       2. Doi mat khau" << endl;
 	cout << "       3. Tro ve" << endl;
 	cout << "******************************************" << endl;
+	do
+	{
+		cout << "Nhap so de chon thong tin ban muon xem/thuc hien (1-3): ";
+		cin >> choice;
+		if (choice < 1 || choice>3)
+			cout << "So da nhap khong dung, vui long nhap lai!" << endl;
+	} while (choice < 1 || choice>3);
+
+	switch (choice)
+	{
+	case 1:
+		system("cls");
+		cout << "------------THONG TIN SINH VIEN-------------\n";
+		cout << "Fullname: " << a[i].fullname << endl;
+		cout << "Student ID: " << a[i].id << endl;
+		cout << "Password: " << a[i].password << endl;
+		cout << "Birthday: ";
+		if (a[i].dob.day < 10)
+		{
+			cout << "0" << a[i].dob.day <<"/";
+		}
+		else
+		{
+			cout << a[i].dob.day << "/";
+		}
+		if (a[i].dob.month < 10)
+		{
+			cout << "0" << a[i].dob.month << "/";
+		}
+		else
+		{
+			cout << a[i].dob.month << "/";
+		}
+		cout << a[i].dob.year << endl;
+		cout << "Class: " << a[i].classes << endl;
+		cout << "Status: " << a[i].status;
+		if (a[i].status == 0)
+			cout << " (Inactive)" << endl;
+		else
+			cout << " (Active)" << endl;
+		cout << "\n";
+		
+		do
+		{
+			cout << "Press f to return ^^: ";cin>> choice1;
+			if (choice1!='f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1!='f');
+		SettingSV(a, n, i);
+		break;
+	case 2:
+		system("cls");
+		npass = ChangePassword(a[i].password);
+		CapNhatPassSV(a, n, npass, i);
+		cout << "Mat khau duoc thay doi thang cong!!" << endl;
+		cout << endl;
+		
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		SettingSV(a, n, i);
+		break;
+	case 3:
+		MenuSinhVien(a, n, i);
+		break;
+	default:
+		break;
+	}
 }
 
 
+void CapNhatPassSV(Student a[], int n, string newpass, int index) {
+	fstream file;
+	file.open("Student.txt", ios::out);
+	if (file.fail())
+	{
+		cout << "Unable to create Student file!" << endl;
+	}
+	else
+	{
+		file << n <<endl;
+		//a = new Student[n];
+		for (int i = 0; i < n; i++)
+		{
+			file << a[i].id<<endl;
+			if (i == index)
+			{
+				file << newpass << endl;
+			}
+			else
+			{
+				file << a[i].password << endl;
+			}
+			file << a[i].fullname<<endl;
+			file << a[i].dob.year << " ";
+			if (a[i].dob.month<10)
+			{
+				file << "0" << a[i].dob.month << " ";
+			}
+			else
+			{
+				file << a[i].dob.month << " ";
+			}
+			if (a[i].dob.day<10)
+			{
+				file << "0" << a[i].dob.day << endl;
+			}
+			else
+			{
+				file << a[i].dob.day << endl;
+			}
+			file << a[i].classes << endl;
+			if (i == n-1)
+			{
+				file << a[i].status;
+			}
+			else
+			{
+				file << a[i].status << endl;
+				file << endl;
+			}
+		}
+	}
+	file.close();
+}
+
+string ChangePassword(string oldpass) {
+	string pass; string pass1,pass2;
+	
+	cout << "-------------------DOI MAT KHAU--------------------\n";
+	do
+	{
+		cout << "Nhap mat khau hien tai: "; cin >> pass;
+		cout << endl;
+		if (pass.compare(oldpass) != 0)
+		{
+			cout << "Sai mat khau!! Vui long nhap lai!!" << endl;
+		}
+	} while (pass.compare(oldpass)!=0);
+	/*do
+	{
+		cout << "Nhap mat khau moi: "; cin >> pass1;
+		cout << "Nhap lai mat khau moi vua nhap: "; cin >> pass2;
+		cout << endl;
+		if (pass1.compare(pass2) != 0)
+		{
+			cout << "Thay doi mat khau that bai!! Vui long nhap lai mat khau moi!!" << endl;
+		}
+	} while (pass1.compare(pass2) != 0);*/
+	cout << "Nhap mat khau moi: "; cin >> pass1;
+	cout << "Nhap lai mat khau moi vua nhap: "; cin >> pass2;
+	if (pass1.compare(pass2) != 0)
+	{
+		system("cls");
+		cout << "Thay doi mat khau that bai!! Vui long nhap lai tu dau!!" << endl;
+		ChangePassword(oldpass);
+	}
+	else
+	{
+		return pass2;
+	}
+	
+}
 
 int main() {
 	Student* a = NULL; int n;
+	
+
+	/*cin >> str;
+	cout << str;*/
 	NhapSVtuFile(a, n); 
 	//Doc(a, n);
 	//Login(a, n, s, s2);
 	ManHinhChinh(a, n);
+	//string test;
+	//GhiFile(a, n, test);
 	delete[] a;
 	return 0;
 }
