@@ -185,6 +185,7 @@ void DeleteYandS()
 	}
 }
 
+
 void ViewYandS()
 {
 	int n;
