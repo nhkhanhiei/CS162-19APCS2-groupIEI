@@ -454,13 +454,13 @@ void ImportAndCreateFile()
 	//cin.ignore();
 	cout << "Input to Import: " << endl;
 	cout << "---------------------------------------" << endl;
-	cout << "Enter Year: ";
+	cout << "Enter Year (yyyy-yyyy): ";
 	getline(cin, x);
-	cout << "Enter Semester: ";
+	cout << "Enter Semester (HKn): ";
 	getline(cin, y);
-	cout << "Enter Class: ";
+	cout << "Enter Class (Ex: 19APCS,..): ";
 	getline(cin, z);
-	cout << "Enter File: ";
+	cout << "Enter File (Ex: 19APCS-Schedule.csv: ";
 	getline(cin, t);
 
 
@@ -529,7 +529,7 @@ void ImportAndCreateFile()
 }
 
 // Manually add an new course (must import first)
-// Add Acount to lecturer
+
 void AddNewCourse()
 {
 	CSD newcourse;
@@ -551,13 +551,13 @@ void AddNewCourse()
 	getline(cin, newcourse.lecturerDegree);
 	cout << "Input course lecturer Gender (0: male, 1: female): ";
 	getline(cin, newcourse.lecturerGender);
-	cout << "Input course start date (m/d/y): ";
+	cout << "Input course start date (mm/dd/yy): ";
 	getline(cin, startdate);
 	newcourse.startDate = stringToDate(startdate);
-	cout << "Input course end date (m/d/y): ";
+	cout << "Input course end date (mm/dd/yy): ";
 	getline(cin, enddate);
 	newcourse.endDate = stringToDate(enddate);
-	cout << "Input course day study: ";
+	cout << "Input course day study (2-7): ";
 	cin >> newcourse.dayStudy;
 	cout << "Input course start hour: ";
 	cin >> newcourse.startHour;
@@ -720,7 +720,7 @@ void EditCourse()
 {
 	int t;
 	ViewListOfCourse();
-	cout << "Input id of course to edit (STT): ";
+	cout << "Input the course you want to edit (STT, Ex: 1, 2,..): ";
 	cin >> t;
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
@@ -842,7 +842,8 @@ void EditCourse()
 void RemoveCourse()
 {
 	int t;
-	cout << "Input id of course to remove: ";
+	ViewListOfCourse();
+	cout << "Input the course you want to remove (STT, Ex: 1, 2,..): ";
 	cin >> t;
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
@@ -905,10 +906,11 @@ void RemoveStudentFromCourse()
 {
 	string removedstudent;
 	int t;
-	cout << "Input id of student you want to remove: ";
+	ViewListOfCourse();
+	cout << "Input the course you want to remove the student from (STT, Ex: 1, 2,..): ";
+	cin >> t; cin.ignore();
+	cout << "Input ID of student you want to remove (Ex: 19127002): ";
 	getline(cin, removedstudent);
-	cout << "Input id of course to remove the student from: ";
-	cin >> t;
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
 
@@ -963,7 +965,8 @@ void AddNewStudentToCourse()
 {
 	int t;
 	StudentCourses newstudent;
-	cout << "Input course id to add new student in: ";
+	ViewListOfCourse();
+	cout << "Input the course you want to add the student to (STT, Ex: 1, 2,..): ";
 	cin >> t;
 	cout << "Add new student" << endl;
 	cout << "------------------------" << endl;
@@ -1072,12 +1075,12 @@ void ViewListOfStudentInCourse()
 	string a;
 	cout << "Input class to view student list: ";
 	getline(cin, a);
-
+	ViewListOfCourse();
 	int t;
-	cout << "Input id of course to view student list: ";
+	cout << "Input the course you want to view the student list (STT, Ex: 1, 2,..): ";
 	cin >> t;
 
-	cout << "There is/are " << k << " Student(s) in this Course " << Schedule[t - 1].courseID << endl;
+	cout << "There is/are " << n << " Student(s) in this Course " << Schedule[t - 1].courseID << endl;
 	cout << "--------------------------------------------" << endl;
 	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
 	int m;
@@ -1121,7 +1124,7 @@ void ViewAttendanceListOfCourse()
 	getline(cin, a);
 
 	int t;
-	cout << "Input id of course to view attendance list: ";
+	cout << "Input the course you want to remove the student from (STT, Ex: 1, 2,..): ";
 	cin >> t;
 
 	cout << "Attendance List of Student(s) in this Course " << Schedule[t - 1].courseID << endl;

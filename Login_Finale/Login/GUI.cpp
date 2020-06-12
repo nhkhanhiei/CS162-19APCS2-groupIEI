@@ -298,20 +298,20 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 	cout << "       1. Create/update/delete/view academic years and semester" << endl;
 	cout << "       2. Import Courses from CSV file" << endl;
 	cout << "       3. Add new course" << endl;
-	cout << "       4. Edit a course" << endl;
-	cout << "       5. Remove a course" << endl;
-	cout << "       6. Remove student from a course" << endl;
-	cout << "       7. Add a specific student to a course" << endl;
+	cout << "       4. Edit a course" << endl; //view course
+	cout << "       5. Remove a course" << endl; //view course
+	cout << "       6. Remove student from a course" << endl; //view course
+	cout << "       7. Add a specific student to a course" << endl; //view course
 	cout << "       8. View list of courses in current semester" << endl;
-	cout << "       9. View list of student of a course" << endl;
-	cout << "       10. View attendance list of a course" << endl;
+	cout << "       9. View list of student of a course" << endl; //view course
+	cout << "       10. View attendance list of a course" << endl; //view course
 	cout << "       11. View all lecturers" << endl;
 	cout << "       12. Return" << endl;
 
 	cout << "******************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-8): ";
+		cout << "Enter your choice (1-12): ";
 		cin >> choice;
 		if (choice < 1 || choice>12)
 			cout << "Wrong choice! Please retry" << endl;
