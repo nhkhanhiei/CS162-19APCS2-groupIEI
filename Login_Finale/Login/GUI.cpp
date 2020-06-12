@@ -1,6 +1,6 @@
 #include "Header.h"
 #include "HeaderStaffClass.h"
-
+#include "AcademicCourses.h"
 void ManHinhChinh(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2)
 {
 	int choice;
@@ -144,6 +144,8 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 	case 1:
 		MenuStaffClass(a, n, b, n1, c, n2, i);
 		break;
+	case 2:
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
 	case 6:
 		SettingStaff(a, n, b, n1, c, n2, i);
 		break;
@@ -155,7 +157,6 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 	}
 }
 
-//viet ham sua tren ca 2 file;
 void MenuStaffClass(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
 {
 	int choice; char choice1;
@@ -173,7 +174,7 @@ void MenuStaffClass(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2,
 	cout << "******************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-9): ";
+		cout << "Enter your choice (1-8): ";
 		cin >> choice;
 		if (choice < 1 || choice>8)
 			cout << "Wrong choice! Please retry" << endl;
@@ -287,6 +288,210 @@ void MenuStaffClass(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2,
 	}
 }
 
+void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
+{
+	int choice; char choice1;
+	system("cls");
+	cout << "******************************************" << endl;
+	cout << "-------------------Courses------------------" << endl;
+	cout << "       1. Create/update/delete/view academic years and semester" << endl;
+	cout << "       2. Add new Student" << endl;
+	cout << "       3. Edit a Student" << endl;
+	cout << "       4. Remove a Student" << endl;
+	cout << "       5. Exchange Student between two classes" << endl;
+	cout << "       6. View list of classes" << endl;
+	cout << "       7. View list of Students in a class" << endl;
+	cout << "       8. Return" << endl;
+	cout << "******************************************" << endl;
+	do
+	{
+		cout << "Enter your choice (1-8): ";
+		cin >> choice;
+		if (choice < 1 || choice>8)
+			cout << "Wrong choice! Please retry" << endl;
+	} while (choice < 1 || choice>8);
+
+	switch (choice)
+	{
+	case 1:
+		system("cls");
+		MenuStaffCoursesYearsSemesters(a, n, b, n1, c, n2, i);
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		importClass();
+		
+		break;
+	case 2:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		addStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 3:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		editStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 4:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		removeStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 5:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		changeClassStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 6:
+		system("cls");
+		viewClass();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+	case 7:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		viewStudent();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffClass(a, n, b, n1, c, n2, i);
+		break;
+
+	case 8:
+		MenuStaff(a, n, b, n1, c, n2, i);
+		break;
+	default:
+		break;
+	}
+}
+
+void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
+{
+	int choice; char choice1;
+	system("cls");
+	cout << "******************************************" << endl;
+	cout << "-------------------Years and Semesters------------------" << endl;
+	cout << "       1. Create academic years and semester" << endl;
+	cout << "       2. Update academic years and semester" << endl;
+	cout << "       3. Delete academic years and semester" << endl;
+	cout << "       4. View academic years and semester" << endl;
+	cout << "******************************************" << endl;
+	do
+	{
+		cout << "Enter your choice (1-4): ";
+		cin >> choice;
+		if (choice < 1 || choice > 4)
+			cout << "Wrong choice! Please retry" << endl;
+	} while (choice < 1 || choice > 4);
+
+	switch (choice)
+	{
+	case 1:
+		system("cls");
+		cin.ignore();
+		CreateYandS();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffCourses(a, n, b, n1, c, n2,i);
+		break;
+	case 2:
+		system("cls");
+		cin.ignore();
+		UpdateYandS();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
+		break;
+	case 3:
+		system("cls");
+		cin.ignore();
+		DeleteYandS();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
+	case 4:
+		system("cls");
+		cin.ignore();
+		ViewYandS();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
+		break;
+	default:
+		break;
+	}
+}
 
 
 void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
