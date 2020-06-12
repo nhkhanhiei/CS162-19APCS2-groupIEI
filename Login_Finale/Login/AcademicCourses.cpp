@@ -458,9 +458,9 @@ void ImportAndCreateFile()
 	getline(cin, x);
 	cout << "Enter Semester (HKn): ";
 	getline(cin, y);
-	cout << "Enter Class (Ex: 19APCS,..): ";
+	cout << "Enter Class (Ex: 19APCS1,..): ";
 	getline(cin, z);
-	cout << "Enter File (Ex: 19APCS-Schedule.csv: ";
+	cout << "Enter File (Ex: 19APCS1-Schedule.csv: ";
 	getline(cin, t);
 
 
@@ -926,6 +926,7 @@ void RemoveStudentFromCourse()
 	ViewListOfCourse();
 	cout << "Input the course you want to remove the student from (STT, Ex: 1, 2,..): ";
 	cin >> t; cin.ignore();
+	ViewListOfStudentInCourse();
 	cout << "Input ID of student you want to remove (Ex: 19127002): ";
 	getline(cin, removedstudent);
 
@@ -1132,6 +1133,8 @@ void ViewListOfStudentInCourse()
 		cout << "Could not open file to view!" << endl;
 	f.close();
 }
+
+
 
 //View Attendance list of Student in a Course (must import first)
 void ViewAttendanceListOfCourse()
