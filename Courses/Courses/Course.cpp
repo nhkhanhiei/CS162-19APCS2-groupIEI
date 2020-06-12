@@ -1118,12 +1118,15 @@ void ViewListOfStudentInCourse()
 void ViewAttendanceListOfCourse()
 {
 	string a;
-	cout << "Input class to view student list: ";
-	getline(cin, a);
 
 	int t;
 	cout << "Input id of course to view attendance list: ";
 	cin >> t;
+
+	cout << "Input class to view student list: ";
+	cin.ignore();
+	getline(cin, a);
+	
 
 	cout << "Attendance List of Student(s) in this Course " << Schedule[t - 1].courseID << endl;
 	cout << "--------------------------------------------" << endl;
