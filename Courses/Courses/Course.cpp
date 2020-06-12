@@ -863,7 +863,7 @@ void RemoveCourse()
 		Schedule[i].startMin = Schedule[i + 1].startMin;
 		Schedule[i].endHour = Schedule[i + 1].endHour;
 		Schedule[i].endMin = Schedule[i + 1].endMin;
-		Schedule[i].lectureRoom = Schedule[i + 1].id;
+		Schedule[i].lectureRoom = Schedule[i + 1].lectureRoom;
 	}
 	k--;
 
