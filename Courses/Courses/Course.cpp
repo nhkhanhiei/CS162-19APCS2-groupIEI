@@ -60,6 +60,7 @@ void CreateYandS()
 	fout.close();
 }
 
+
 void UpdateYandS()
 {
 	int n;
