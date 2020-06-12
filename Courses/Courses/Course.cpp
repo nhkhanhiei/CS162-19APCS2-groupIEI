@@ -1072,15 +1072,18 @@ void ViewListOfStudentInCourse()
 	cout << "Input id of course to view student list: ";
 	cin >> t;
 
-	cout << "There is/are " << n << " Student(s) in this Course " << Schedule[t-1].courseID << endl;
-	cout << "--------------------------------------------" << endl;
+	
 	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
+
 	int m;
+
 	Student temp;
 	ifstream f(file);
 	if (f.is_open())
 	{
 		f >> m;
+		cout << "There is/are " << m << " Student(s) in this Course " << Schedule[t - 1].courseID << endl;
+		cout << "--------------------------------------------" << endl;
 		for (int i = 0; i < m; i++)
 		{
 			if (i == 0)
@@ -1197,13 +1200,14 @@ int main()
 {
 	//CreateYandS();
 	ImportAndCreateFile();
-	AddNewCourse();
+	//AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
-	//RemoveStudentFromCourse();
+	RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
-	ViewListOfCourse();
-	//ViewListOfStudentInCourse();
+	//ViewListOfCourse();
+	cin.ignore();
+	ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
 	//ViewAllLecturers();
 	system("pause>nul");
