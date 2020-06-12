@@ -14,7 +14,7 @@ Do Vuong Phuc Hoi Nhieu
 1
 
 1912799
-khoa1545560
+12345678
 Super Star
 2001 04 01
 19CLC10
@@ -25,7 +25,7 @@ Super Star
 Nguyen Van 1
 2020 04 01
 19APCS1
-1
+0
 
 19127002
 20200402
