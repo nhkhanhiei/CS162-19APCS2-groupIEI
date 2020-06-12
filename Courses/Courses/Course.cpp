@@ -829,6 +829,7 @@ void EditCourse()
 	fout.close();
 	fin.close();
 	remove((file).c_str());
+	UpdateLecturer();
 }
 
 // Remove a Course (must import first)
@@ -1200,14 +1201,14 @@ int main()
 	//CreateYandS();
 	ImportAndCreateFile();
 	//AddNewCourse();
-	//EditCourse();
+	EditCourse();
 	//RemoveCourse();
 	//RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
 	//ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
-	//ViewAllLecturers();
+	ViewAllLecturers();
 	system("pause>nul");
 	return 0;
 }
