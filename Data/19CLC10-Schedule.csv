@@ -1,0 +1,4 @@
+﻿No,Course ID,Course name,Class,Lecturer username,Lecturer name,Lecturer degree,Lecturer gender,Start date,End date,Day of week,Start hour,Start minutes,End hour,End minute,Room
+1,BAA00101,Marxism and Leninism,19CLC10,nqhuy,Ngo Quang Huy,TS,Male,3/16/2020,5/23/2020,TUE,7,30,11,30,B11
+2,CS163,Data Structures,19CLC10,dbtien,Dinh Ba Tien,TS,Male,3/16/2020,5/23/2020,MON,7,30,11,30,I42
+3,MTH261,Linear Algebra,19CLC10,lvluyen,Le Van Luyen,TS,Male,3/16/2020,5/23/2020,FRI,13,30,16,30,I44
