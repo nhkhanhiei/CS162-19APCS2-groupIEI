@@ -295,13 +295,18 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 	cout << "******************************************" << endl;
 	cout << "-------------------Courses------------------" << endl;
 	cout << "       1. Create/update/delete/view academic years and semester" << endl;
-	cout << "       2. Add new Student" << endl;
-	cout << "       3. Edit a Student" << endl;
-	cout << "       4. Remove a Student" << endl;
-	cout << "       5. Exchange Student between two classes" << endl;
-	cout << "       6. View list of classes" << endl;
-	cout << "       7. View list of Students in a class" << endl;
-	cout << "       8. Return" << endl;
+	cout << "       2. Import Courses from CSV file" << endl;
+	cout << "       3. Add new course" << endl;
+	cout << "       4. Edit a course" << endl;
+	cout << "       5. Remove a course" << endl;
+	cout << "       6. Remove student from a course" << endl;
+	cout << "       7. Add a specific student to a course" << endl;
+	cout << "       8. View list of course in current semester" << endl;
+	cout << "       9. View list of student of a course" << endl;
+	cout << "       10. View attendance list of a course" << endl;
+	cout << "       11. Create / update / delete / view all lecturers" << endl;
+	cout << "       12. Return" << endl;
+
 	cout << "******************************************" << endl;
 	do
 	{
@@ -316,14 +321,11 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 	case 1:
 		system("cls");
 		MenuStaffCoursesYearsSemesters(a, n, b, n1, c, n2, i);
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		importClass();
-		
 		break;
 	case 2:
 		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		addStudent();
+		cin.ignore();
+		ImportAndCreateFile();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -336,8 +338,8 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 		break;
 	case 3:
 		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		editStudent();
+		cin.ignore();
+		AddNewCourse();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -350,8 +352,8 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 		break;
 	case 4:
 		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		removeStudent();
+		cin.ignore();
+		EditCourse();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -364,8 +366,8 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 		break;
 	case 5:
 		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		changeClassStudent();
+		cin.ignore();
+		RemoveCourse();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;

@@ -450,6 +450,7 @@ void UpdateLecturer()
 
 void ImportAndCreateFile()
 {
+	//cin.ignore();
 	cout << "Input to Import: " << endl;
 	cout << "---------------------------------------" << endl;
 	cout << "Enter Year: ";
