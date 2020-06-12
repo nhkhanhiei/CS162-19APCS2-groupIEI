@@ -46,7 +46,10 @@ void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 void MenuStaffClass(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
 void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
 void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
-void MenuStaffLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+//void MenuStaffLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+void MenuStaffScoreBoard(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+void MenuStaffAttendance(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);
+
 
 //-------------------------------------------------------------------------------------
 void SettingSV(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i);

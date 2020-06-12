@@ -46,3 +46,7 @@ void ViewSchedules();
 //Students
 void ViewScore();
 
+void toUpper(char& c);
+void viewScoreboard();
+void importScoreboard();
+void exportScoreboard();

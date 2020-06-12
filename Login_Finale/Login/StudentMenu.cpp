@@ -869,3 +869,341 @@ void ViewScore()
 	fin.close();
 	delete[] student;
 }
+
+void toUpper(char& c)
+{
+	c = toupper(static_cast<unsigned char>(c));
+}
+
+void viewScoreboard()
+{
+	string temp, filename;
+
+	cout << "Input scoreboard you would like to see: \n" << endl;
+	cout << "   Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	for_each(filename.begin(), filename.end(), toUpper);
+	string f1 = filename;
+
+	cout << "   Semester: ";
+	getline(cin, temp);
+	for_each(temp.begin(), temp.end(), toUpper);
+	string f2 = temp;
+	filename += '-' + temp;
+
+	cout << "   Class: ";
+	getline(cin, temp);
+	for_each(temp.begin(), temp.end(), toUpper);
+	string f3 = temp;
+	filename += '-' + temp;
+
+	cout << "   Course ID: ";
+	getline(cin, temp);
+	for_each(temp.begin(), temp.end(), toUpper);
+	string f4 = temp;
+
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open(filename, ios::in);
+
+	if (fin.fail())
+	{
+		cout << "\nUnable to open file!" << endl;
+		fin.close();
+		return;
+	}
+
+	system("cls");
+	cout << "<School year: " << f1 << "\\ Semester: " << f2 << "\\ Class: " << f3 << "\\ Course: " << f4 << ">" << endl;
+	cout << "\n";
+	int n;
+	fin >> n;
+	fin.ignore();
+	StudentMenu* student = new StudentMenu[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		getline(fin, student[i].id);
+		getline(fin, student[i].password);
+		getline(fin, student[i].name);
+		getline(fin, student[i].DoB);
+		getline(fin, student[i].Class);
+		getline(fin, student[i].status);
+		getline(fin, student[i].midterm);
+		getline(fin, student[i].final);
+		getline(fin, student[i].bonus);
+		getline(fin, student[i].total);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
+		getline(fin, temp);
+		fin.ignore(1, '\n');
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << i + 1 << ". " << student[i].name << ": " << endl;
+
+		cout << "   + Midterm: " << student[i].midterm;
+		if (student[i].midterm == "-1")
+			cout << " (Student yet to have this grade!)" << endl;
+		else
+			cout << endl;
+		cout << "   + Final: " << student[i].final;
+		if (student[i].final == "-1")
+			cout << "   (Student yet to have this grade!)" << endl;
+		else
+			cout << endl;
+		cout << "   + Bonus: " << student[i].bonus;
+		if (student[i].bonus == "-1")
+			cout << "   (Student yet to have this grade!)" << endl;
+		else
+			cout << endl;
+		cout << "   + Total: " << student[i].total;
+		if (student[i].total == "-1")
+			cout << "   (Student yet to have this grade!)" << endl;
+		else
+			cout << endl;
+		cout << "\n";
+	}
+
+	fin.close();
+	delete[] student;
+}
+
+void importScoreboard()
+{
+	cout << "Input scoreboard you would like to export: \n" << endl;
+
+	cout << "   Class: ";
+	string classTemp;
+	getline(cin, classTemp);
+	for_each(classTemp.begin(), classTemp.end(), toUpper);
+
+	cout << "   Course ID: ";
+	string courseTemp;
+	getline(cin, courseTemp);
+	for_each(courseTemp.begin(), courseTemp.end(), toUpper);
+
+	string fileCsv;
+	fileCsv += classTemp + '-' + courseTemp + "-Scoreboard.csv";
+	fstream fin;
+	fin.open(fileCsv, ios::in);
+
+	if (fin.fail())
+	{
+		cout << "Unable to open CSV file!" << endl;
+		fin.close();
+	}
+	else
+	{
+		string Dump;
+		int i = 0;
+		while (!fin.eof())
+		{
+			getline(fin, Dump);
+			i++;
+		}
+		fin.close();
+
+		string* row;
+		row = new string[i - 1];
+
+		fstream fin2;
+		fin2.open(fileCsv, ios::in);
+
+		string linetemp;
+		getline(fin2, linetemp);
+
+		int z = 0;
+		while (!fin2.eof())
+		{
+			getline(fin2, row[z]);
+			for (int q = 0; q < row[z].length(); q++)
+			{
+				if (row[z][q] == ',')
+				{
+					row[z].erase(0, q + 1);
+					break;
+				}
+			}
+			z++;
+		}
+
+		fstream F;
+
+		cout << "\n   School year (yyyy-yyyy) of class: ";
+		string yearTemp;
+		getline(cin, yearTemp);
+		for_each(yearTemp.begin(), yearTemp.end(), toUpper);
+
+		cout << "   Semester of class: ";
+		string semTemp;
+		getline(cin, semTemp);
+		for_each(semTemp.begin(), semTemp.end(), toUpper);
+
+		string Fname;
+		Fname += yearTemp + '-' + semTemp + '-' + classTemp + '-' + courseTemp + "-Student.txt";
+
+		F.open(Fname, ios::in);
+
+		if (F.fail())
+		{
+			cout << "Unable to open file!" << endl;
+			F.close();
+			return;
+		}
+
+		string trash;
+		int n;
+		F >> n;
+		F.ignore();
+		StudentMenu* student = new StudentMenu[n + 1];
+		for (int i = 0; i < n; i++)
+		{
+			getline(F, student[i].id);
+			getline(F, student[i].password);
+			getline(F, student[i].name);
+			getline(F, student[i].DoB);
+			getline(F, student[i].Class);
+			getline(F, student[i].status);
+			getline(F, student[i].midterm);
+			getline(F, student[i].final);
+			getline(F, student[i].bonus);
+			getline(F, student[i].total);
+			for (int j = 0; j < 10; j++)
+				getline(F, student[i].att[j]);
+			getline(F, trash);
+			F.ignore(1, '\n');
+		}
+
+		F.close();
+
+		fstream Ft;
+		Ft.open(Fname, ios::out);
+
+		Ft << i - 1 << endl;
+		for (int j = 0; j < i - 1; j++)
+		{
+			istringstream iss(row[j]);
+			string token[6];
+			int k = 0;
+			for (int e = 0; e < 6; e++)
+				token[e].clear();
+			while (getline(iss, token[k], ','))
+			{
+				k++;
+			}
+
+			student[j].id = token[0];
+			student[j].name = token[1];
+			student[j].midterm = token[2];
+			student[j].final = token[3];
+			student[j].bonus = token[4];
+			student[j].total = token[5];
+
+			Ft << student[j].id << endl;
+			Ft << student[j].password << endl;
+			Ft << student[j].name << endl;
+			Ft << student[j].DoB << endl;
+			Ft << student[j].Class << endl;
+			Ft << student[j].status << endl;
+			Ft << student[j].midterm << endl;
+			Ft << student[j].final << endl;
+			Ft << student[j].bonus << endl;
+			Ft << student[j].total << endl;
+			for (int w = 0; w < 10; w++)
+				Ft << student[j].att[w] << endl;
+			Ft << 1 << endl;
+			Ft << endl;
+		}
+
+		Ft.close();
+		delete[] student;
+		delete[] row;
+
+		cout << "\nImport students done!" << endl;
+	}
+
+}
+
+void exportScoreboard()
+{
+	string temp, filename;
+
+	cout << "Input scoreboard you would like to export: \n" << endl;
+	cout << "   Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	for_each(filename.begin(), filename.end(), toUpper);
+	string f1 = filename;
+
+	cout << "   Semester: ";
+	getline(cin, temp);
+	for_each(temp.begin(), temp.end(), toUpper);
+	string f2 = temp;
+	filename += '-' + temp;
+
+	cout << "   Class: ";
+	getline(cin, temp);
+	for_each(temp.begin(), temp.end(), toUpper);
+	string f3 = temp;
+	filename += '-' + temp;
+
+	cout << "   Course ID: ";
+	getline(cin, temp);
+	for_each(temp.begin(), temp.end(), toUpper);
+	string f4 = temp;
+
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open(filename, ios::in);
+
+	if (fin.fail())
+	{
+		cout << "\nUnable to open file!" << endl;
+		fin.close();
+		return;
+	}
+
+	int n;
+	fin >> n;
+	fin.ignore();
+	StudentMenu* student = new StudentMenu[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		getline(fin, student[i].id);
+		getline(fin, student[i].password);
+		getline(fin, student[i].name);
+		getline(fin, student[i].DoB);
+		getline(fin, student[i].Class);
+		getline(fin, student[i].status);
+		getline(fin, student[i].midterm);
+		getline(fin, student[i].final);
+		getline(fin, student[i].bonus);
+		getline(fin, student[i].total);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
+		getline(fin, temp);
+		fin.ignore(1, '\n');
+	}
+	fin.close();
+
+	fstream fout;
+	string F;
+	F += f3;
+	F += "-";
+	F += f4;
+	F += "-Scoreboard.csv";
+
+	fout.open(F, ios::out);
+	fout << "No,Student ID,Fullname,Midterm,Final,Bonus,Total";
+	string def;
+	fout << endl;
+	for (int i = 0; i < n; i++)
+	{
+		fout << i + 1 << "," << student[i].id << "," << student[i].name << "," << student[i].midterm << "," << student[i].final << "," << student[i].bonus << "," << student[i].total << ",";
+		fout << endl;
+	}
+	fout.close();
+	delete[] student;
+
+	cout << "\nExport successfully!" << endl;
+}

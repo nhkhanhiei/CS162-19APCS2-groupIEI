@@ -1129,7 +1129,6 @@ void ViewListOfStudentInCourse()
 				f.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << i + 1 << ")" << endl;
 			cout << setw(30) << left << "Student Id: " << temp.id << endl;
-			cout << setw(30) << left << "Student Password: " << temp.password << endl;
 			cout << setw(30) << left << "Student Name: " << temp.name << endl;
 			cout << setw(30) << left << "Student Day of Birth: " << temp.DoB << endl;
 			cout << setw(30) << left << "Student Class: " << temp.Class << endl;

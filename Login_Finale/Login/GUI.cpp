@@ -203,8 +203,10 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 		MenuStaffCourses(a, n, b, n1, c, n2, i);
 		break;
 	case 3:
+		MenuStaffScoreBoard(a, n, b, n1, c, n2, i);
 		break;
 	case 4:
+		MenuStaffAttendance(a, n, b, n1, c, n2, i);
 		break;
 	case 5:
 		SettingStaff(a, n, b, n1, c, n2, i);
@@ -216,6 +218,118 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 		break;
 	}
 }
+
+void MenuStaffScoreBoard(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i) {
+	int choice; char choice1;
+	system("cls");
+	cout << "***************************************************" << endl;
+	cout << "---------------------Scoreboard--------------------" << endl;
+	cout << "   1. Search and view the scoreboard of a course" << endl;
+	cout << "     2. Export a scoreboard to csv file" << endl;
+	cout << "       3. Return" << endl;
+	cout << "***************************************************" << endl;
+	do
+	{
+		cout << "Enter your choice (1-8): ";
+		cin >> choice;
+		cin.ignore();
+		if (choice < 1 || choice>3)
+			cout << "Wrong choice! Please retry" << endl;
+	} while (choice < 1 || choice>3);
+
+	switch (choice)
+	{
+	case 1:
+		system("cls");
+		viewScoreboard();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffScoreBoard(a, n, b, n1, c, n2, i);
+		break;
+	case 2:
+		system("cls");
+		exportScoreboard();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffScoreBoard(a, n, b, n1, c, n2, i);
+		break;
+	
+	case 3:
+		MenuStaff(a, n, b, n1, c, n2, i);
+		break;
+	default:
+		break;
+	}
+}
+
+void MenuStaffAttendance(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i) {
+	int choice; char choice1;
+	system("cls");
+	cout << "***************************************************" << endl;
+	cout << "---------------------Attendance--------------------" << endl;
+	cout << "   1. Search and view attendence list of a course" << endl;
+	cout << "     2. Export an attendance list to csv file" << endl;
+	cout << "       3. Return" << endl;
+	cout << "***************************************************" << endl;
+	do
+	{
+		cout << "Enter your choice (1-8): ";
+		cin >> choice;
+		cin.ignore();
+		if (choice < 1 || choice>3)
+			cout << "Wrong choice! Please retry" << endl;
+	} while (choice < 1 || choice>3);
+
+	switch (choice)
+	{
+	case 1:
+		system("cls");
+		ViewAttendance();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffScoreBoard(a, n, b, n1, c, n2, i);
+		break;
+	case 2:
+		system("cls");
+		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
+		ExportAttendance();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuStaffScoreBoard(a, n, b, n1, c, n2, i);
+		break;
+
+	case 3:
+		MenuStaff(a, n, b, n1, c, n2, i);
+		break;
+	default:
+		break;
+	}
+}
+
 
 void MenuStaffClass(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
 {
@@ -659,7 +773,7 @@ void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 		break;
 	case 2:
 		system("cls");
-		ViewStudentsList();
+		ViewListOfStudentInCourse();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -698,7 +812,7 @@ void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 		break;
 	case 5:
 		system("cls");
-		//Import();
+		importScoreboard();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -724,7 +838,7 @@ void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 		break;
 	case 7:
 		system("cls");
-		ViewScore();
+		viewScoreboard();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
