@@ -1,4 +1,4 @@
 ﻿No,Course ID,Course name,Class,Lecturer username,Lecturer name,Lecturer degree,Lecturer gender,Start date,End date,Day of week,Start hour,Start minutes,End hour,End minute,Room
-1,MTH252,Calculus,19APCS2,lvluyen,Le Van Luyen,TS,Male,4/13/2020,6/15/2020,TUE,13,30,16,30,I42
-2,CS162,Introduction to Computer Science II,19APCS2,dbtien,Dinh Ba Tien,TS,Male,4/6/2020,6/8/2020,FRI,7,30,11,30,I42
-3,PH212,General Physics II,19APCS2,nhnha,Nguyen Huu Nha,TS,Male,4/6/2020,6/8/2020,THU,13,20,17,30,I24
+1,MTH252,Calculus,19APCS2,lvluyen,Le Van Luyen,TS,Male,4/13/20,6/15/20,TUE,13,30,16,30,I42
+2,CS162,Introduction to Computer Science II,19APCS2,dbtien,Dinh Ba Tien,TS,Male,4/6/20,6/8/20,FRI,7,30,11,30,I42
+3,PH212,General Physics II,19APCS2,nhnha,Nguyen Huu Nha,TS,Male,4/6/20,6/8/20,THU,13,20,17,30,I24

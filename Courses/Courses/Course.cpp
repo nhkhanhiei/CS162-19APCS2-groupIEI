@@ -707,6 +707,7 @@ void AddNewCourse()
 	else
 		cout << "Could not open file!" << endl;
 	fout.close();
+	UpdateLecturer();
 }
 
 // Edit Existing Course (must import first)
@@ -829,6 +830,7 @@ void EditCourse()
 	fout.close();
 	fin.close();
 	remove((file).c_str());
+	UpdateLecturer();
 }
 
 // Remove a Course (must import first)
@@ -861,7 +863,7 @@ void RemoveCourse()
 		Schedule[i].startMin = Schedule[i + 1].startMin;
 		Schedule[i].endHour = Schedule[i + 1].endHour;
 		Schedule[i].endMin = Schedule[i + 1].endMin;
-		Schedule[i].lectureRoom = Schedule[i + 1].id;
+		Schedule[i].lectureRoom = Schedule[i + 1].lectureRoom;
 	}
 	k--;
 
@@ -898,10 +900,12 @@ void RemoveStudentFromCourse()
 {
 	string removedstudent;
 	int t;
-	cout << "Input id of student you want to remove: ";
-	getline(cin, removedstudent);
 	cout << "Input id of course to remove the student from: ";
 	cin >> t;
+
+	cout << "Input id of student you want to remove: ";
+	cin.ignore();
+	getline(cin, removedstudent);
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
 
@@ -1202,10 +1206,10 @@ int main()
 	//AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
-	//RemoveStudentFromCourse();
+	RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
-	//ViewListOfStudentInCourse();
+	ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
 	//ViewAllLecturers();
 	system("pause>nul");
