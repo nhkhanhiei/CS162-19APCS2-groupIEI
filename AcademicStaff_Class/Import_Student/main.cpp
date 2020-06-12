@@ -980,6 +980,7 @@ void importClass()
 
 		fstream file;
 		string fileName = "Student-" + cl + ".txt";
+		string fileElement = fileName;
 		file.open(fileName, ios::out);
 
 		int w = 0;
@@ -1027,6 +1028,132 @@ void importClass()
 		cout << "\nImport students done!" << endl;
 		cout << "Success: " << w << endl;
 		cout << "Fail: " << i - 1 - w << endl;
+
+
+		fstream readFileTotal;
+		readFileTotal.open("Student.txt", ios::in);
+
+		if (readFileTotal.fail())
+		{
+			cout << "Unable to read Student file!" << endl;
+			readFileTotal.close();
+		}
+		else
+		{
+			int z;
+			readFileTotal >> z;
+
+			int count = 0;
+			int tempDay = 0;
+			int tempMonth = 0;
+			int tempYear = 0;
+			string temp;
+
+			Student* sOfClass;
+			sOfClass = new Student[z + w];
+
+			for (int i = 0; i < z; i++)
+			{
+				temp = "";
+				readFileTotal >> sOfClass[i].id;
+				readFileTotal.ignore();
+				getline(readFileTotal, sOfClass[i].password);
+				getline(readFileTotal, sOfClass[i].fullname);
+				readFileTotal >> tempYear >> tempMonth >> tempDay;
+				readFileTotal.ignore();
+				if (tempDay < 10)
+				{
+					sOfClass[i].dob.day += '0';
+				}
+				sOfClass[i].dob.day += to_string(tempDay);
+
+				if (tempMonth < 10)
+				{
+					sOfClass[i].dob.month += '0';
+				}
+				sOfClass[i].dob.month += to_string(tempMonth);
+
+				if (tempYear < 10)
+					sOfClass[i].dob.year += "000";
+				else if (tempYear < 100)
+					sOfClass[i].dob.year += "00";
+				else if (tempYear < 1000)
+					sOfClass[i].dob.year += '0';
+				sOfClass[i].dob.year += to_string(tempYear);
+
+				getline(readFileTotal, temp);
+				readFileTotal >> sOfClass[i].status;
+				readFileTotal.ignore();
+				if (sOfClass[i].status == 1)
+					count += 1;
+			}
+			readFileTotal.close();
+
+			fstream readFileelement;
+			readFileelement.open(fileElement, ios::in);
+
+			count = 0;
+			tempDay = 0;
+			tempMonth = 0;
+			tempYear = 0;
+			temp = "";
+
+			for (int i = z; i < z + w; i++)
+			{
+				temp = "";
+				readFileelement >> sOfClass[i].id;
+				readFileelement.ignore();
+				getline(readFileelement, sOfClass[i].password);
+				getline(readFileelement, sOfClass[i].fullname);
+				readFileelement >> tempYear >> tempMonth >> tempDay;
+				readFileelement.ignore();
+				if (tempDay < 10)
+				{
+					sOfClass[i].dob.day += '0';
+				}
+				sOfClass[i].dob.day += to_string(tempDay);
+
+				if (tempMonth < 10)
+				{
+					sOfClass[i].dob.month += '0';
+				}
+				sOfClass[i].dob.month += to_string(tempMonth);
+
+				if (tempYear < 10)
+					sOfClass[i].dob.year += "000";
+				else if (tempYear < 100)
+					sOfClass[i].dob.year += "00";
+				else if (tempYear < 1000)
+					sOfClass[i].dob.year += '0';
+				sOfClass[i].dob.year += to_string(tempYear);
+
+				getline(readFileelement, temp);
+				readFileelement >> sOfClass[i].status;
+				readFileelement.ignore();
+				if (sOfClass[i].status == 1)
+					count += 1;
+			}
+			readFileelement.close();
+
+			fstream openFileTotal;
+			openFileTotal.open("Student.txt", ios::out);
+
+			openFileTotal << z + w << "\n";
+			for (int i = 0; i < z + w; i++)
+			{
+				openFileTotal << sOfClass[i].id;
+				openFileTotal << "\n";
+				openFileTotal << sOfClass[i].password;
+				openFileTotal << "\n";
+				openFileTotal << sOfClass[i].fullname << "\n";
+				openFileTotal << sOfClass[i].dob.year << " " << sOfClass[i].dob.month << " " << sOfClass[i].dob.day << "\n";
+				openFileTotal << cl << "\n";
+				openFileTotal << sOfClass[i].status;
+				openFileTotal << "\n\n";
+			}
+			delete[] sOfClass;
+			openFileTotal.close();
+		}
 	}
 }
 
