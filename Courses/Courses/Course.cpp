@@ -454,14 +454,13 @@ void UpdateLecturer()
 				break;
 			if (j == u - 1 && Schedule[i].lecturerName != name[j])
 			{
-				u++;
 				string temp;
 				ifstream in("Lecturer.txt");
 				ofstream out("Lecturer1.txt");
 				if (in.is_open() && out.is_open())
 				{
 					getline(in, temp);
-					out << u << endl;
+					out << u + 1 << endl;
 					while (!in.eof())
 					{
 						getline(in, temp);
@@ -479,7 +478,6 @@ void UpdateLecturer()
 				ofstream fout("Lecturer.txt", ios::app);
 				if (fout.is_open())
 				{
-					fout << endl;
 					fout << Schedule[i].lecturerUsername << endl;
 					fout << Schedule[i].lecturerUsername << endl;
 					fout << Schedule[i].lecturerName << endl;
@@ -489,12 +487,12 @@ void UpdateLecturer()
 				else
 					cout << "Could not update lecturer!" << endl;
 				fout.close();
+				u++;
 				break;
 			}
 		}
 		
 	}
-
 }
 
 void ImportAndCreateFile()
@@ -1204,11 +1202,10 @@ int main()
 	//AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
-	RemoveStudentFromCourse();
+	//RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
-	cin.ignore();
-	ViewListOfStudentInCourse();
+	//ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
 	//ViewAllLecturers();
 	system("pause>nul");
