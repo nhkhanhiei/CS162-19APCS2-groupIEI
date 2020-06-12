@@ -8,10 +8,7 @@ int main() {
 	NhapSVtuFile(a, n); 
 	NhapStafftuFile(b, n1);
 	NhapLecturertuFile(c, n2);
-	//DocLecturer(c, n2);
-	//DocStaff(b, n1);
-	//Doc(a, n);
-	//Login(a, n, s, s2);
+
 	ManHinhChinh(a, n,b,n1,c,n2);
 	delete[] c;
 	delete[] b;

@@ -1,5 +1,4 @@
-19
-
+20
 1751021
 19990401
 Nguyen Duc Thang
@@ -10,15 +9,14 @@ Nguyen Duc Thang
 18125048
 20000401
 Nguyen Tran Quang Duy
-2000 04 10 
+2000 04 10
 19APCS1
 1
-
 
 19125021
 20010917
 Nguyen Thanh Dat
-2001 09 17 
+2001 09 17
 19APCS1
 1
 
@@ -46,7 +44,7 @@ Mai Thi Cam Van
 18125070
 20000722
 Dinh Cong Dat
-2000 07 22 
+2000 07 22
 19APCS2
 1
 
@@ -60,7 +58,7 @@ Chu Duc An
 19125006
 20010318
 Truong Quy Hai
-2001-03-18
+2001 03 18
 19APCS2
 1
 
@@ -73,7 +71,7 @@ Bui Quang Minh
 
 19125043
 20010329
-Vu Thien Hoang 
+Vu Thien Hoang
 2001 03 29
 19APCS2
 1
@@ -88,7 +86,7 @@ Nguyen Hoang Linh
 1751084
 19990426
 Vu Dang Nghia
-1999 04 26 
+1999 04 26
 19CLC5
 1
 
@@ -122,7 +120,7 @@ Le Thao Huyen
 
 19125052
 20011115
-Tran Ky Khang
+Tran Ky Nam
 2001 11 15
 19CLC10
 1
@@ -133,3 +131,10 @@ Chau Huu Phat
 2001 11 05
 19CLC10
 1
+
+12345678
+20010719
+Khoa Bui Dang
+2001 07 19
+19APCS2
+0

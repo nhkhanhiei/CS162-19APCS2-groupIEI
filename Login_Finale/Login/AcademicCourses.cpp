@@ -851,6 +851,7 @@ void EditCourse()
 	fout.close();
 	fin.close();
 	remove((file).c_str());
+	UpdateLecturer();
 }
 
 // Remove a Course (must import first)
