@@ -239,11 +239,14 @@ void ViewStudentList()
 		getline(fin, temp);
 		fin.ignore(1, '\n');
 	}
-	cout << "List of students studying: ";
+	cout << "List of students studying: " << endl;
 	for (int i = 0; i < n; i++)
 	{
 		if (student[i].status == "1")
+		{
 			cout << student[i].name << endl;
+			cout << student[i].id << endl;
+		}
 	}
 	fin.close();
 	delete[] student;
