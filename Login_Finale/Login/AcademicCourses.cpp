@@ -20,6 +20,7 @@ void CreateYandS()
 				fin.ignore();
 			getline(fin, data[i].year);
 			getline(fin, data[i].semester);
+			fin.ignore(1, '\n');
 		}
 	}
 	else
@@ -60,6 +61,7 @@ void UpdateYandS()
 				fin.ignore();
 			getline(fin, data[i].year);
 			getline(fin, data[i].semester);
+			fin.ignore(1, '\n');
 		}
 	}
 	else
@@ -122,6 +124,7 @@ void DeleteYandS()
 				fin.ignore();
 			getline(fin, data[i].year);
 			getline(fin, data[i].semester);
+			fin.ignore(1,'\n');
 		}
 	}
 	else
@@ -182,6 +185,8 @@ void ViewYandS()
 				f.ignore();
 			getline(f, data[i].year);
 			getline(f, data[i].semester);
+			f.ignore(1, '\n');
+			
 		}
 		for (int i = 0; i < n; i++)
 		{

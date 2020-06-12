@@ -463,8 +463,8 @@ void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lectu
 		break;
 	case 3:
 		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		editStudent();
+		cin.ignore();
+		DeleteYandS();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -473,12 +473,11 @@ void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lectu
 				cout << "Nooo press f ==!! ";
 			}
 		} while (choice1 != 'f');
-		MenuStaffClass(a, n, b, n1, c, n2, i);
-		break;
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
 	case 4:
 		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		removeStudent();
+		cin.ignore();
+		ViewYandS();
 		do
 		{
 			cout << "Press f to return ^^: "; cin >> choice1;
@@ -487,52 +486,7 @@ void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lectu
 				cout << "Nooo press f ==!! ";
 			}
 		} while (choice1 != 'f');
-		MenuStaffClass(a, n, b, n1, c, n2, i);
-		break;
-	case 5:
-		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		changeClassStudent();
-		do
-		{
-			cout << "Press f to return ^^: "; cin >> choice1;
-			if (choice1 != 'f')
-			{
-				cout << "Nooo press f ==!! ";
-			}
-		} while (choice1 != 'f');
-		MenuStaffClass(a, n, b, n1, c, n2, i);
-		break;
-	case 6:
-		system("cls");
-		viewClass();
-		do
-		{
-			cout << "Press f to return ^^: "; cin >> choice1;
-			if (choice1 != 'f')
-			{
-				cout << "Nooo press f ==!! ";
-			}
-		} while (choice1 != 'f');
-		MenuStaffClass(a, n, b, n1, c, n2, i);
-		break;
-	case 7:
-		system("cls");
-		cout << "Note: Enter whole name of the class. Example: 19APCS1, 19apcs2,.." << endl;
-		viewStudent();
-		do
-		{
-			cout << "Press f to return ^^: "; cin >> choice1;
-			if (choice1 != 'f')
-			{
-				cout << "Nooo press f ==!! ";
-			}
-		} while (choice1 != 'f');
-		MenuStaffClass(a, n, b, n1, c, n2, i);
-		break;
-
-	case 8:
-		MenuStaff(a, n, b, n1, c, n2, i);
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
 		break;
 	default:
 		break;
