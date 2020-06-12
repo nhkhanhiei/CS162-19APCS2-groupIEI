@@ -15,10 +15,13 @@ struct Dates
 	int month;
 	int year;
 };
-
+struct Course
+{
+	string id, name, Class, lecturer;
+};
 struct Student
 {
-	string id, password, name, DoB, Class, status,midterm,final,bonus,total;
+	string id, password, name, DoB, Class, status, midterm, final, bonus, total;
 	string att[11];
 };
 
@@ -32,13 +35,14 @@ struct Schedule
 };
 
 
+
 void ViewAttendance()
 {
 	//2019-2020-HK2-19APCS1-CM101-Student.txt
-	string temp,filename;
+	string temp, filename;
 	cout << "Which attendance list would you like to see?" << endl;
 	cout << "Please enter the following information: " << endl;
-	cout << "Year(yyyy-yyyy): " ;
+	cout << "Year(yyyy-yyyy): ";
 	getline(cin, filename);
 	cout << "Semester: ";
 	getline(cin, temp);
@@ -48,9 +52,9 @@ void ViewAttendance()
 	filename += '-' + temp;
 	cout << "Course ID: ";
 	getline(cin, temp);
-	filename += '-' + temp + "-Student.txt" ;
+	filename += '-' + temp + "-Student.txt";
 	fstream fin;
-	fin.open(filename, ios::in || ios:: out);
+	fin.open(filename, ios::in || ios::out);
 	if (fin.fail())
 	{
 		cout << "Khong mo duoc file";
@@ -60,7 +64,7 @@ void ViewAttendance()
 	int n;
 	fin >> n;
 	fin.ignore();
-	Student* student = new Student[n+1];
+	Student* student = new Student[n + 1];
 	for (int i = 0; i < n; i++)
 	{
 		getline(fin, student[i].id);
@@ -73,8 +77,8 @@ void ViewAttendance()
 		getline(fin, student[i].final);
 		getline(fin, student[i].bonus);
 		getline(fin, student[i].total);
-		for(int j = 0; j < 10; j++)
-		getline(fin, student[i].att[j]);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
 		getline(fin, temp);
 		fin.ignore(1, '\n');
 	}
@@ -158,7 +162,7 @@ void ExportAttendance()
 		getline(fin, temp);
 		fin.ignore(1, '\n');
 	}
-	
+
 
 
 
@@ -221,7 +225,7 @@ void ViewStudentList()
 	int n;
 	fin >> n;
 	fin.ignore();
-	Student* student = new Student[n + 1];
+	StudentMenu* student = new StudentMenu[n + 1];
 	for (int i = 0; i < n; i++)
 	{
 		getline(fin, student[i].id);
@@ -265,7 +269,7 @@ void EditAttendance()
 	getline(cin, temp);
 	filename += '-' + temp + "-Student.txt";
 
-	
+
 	fstream fin;
 	fin.open(filename, ios::in | ios::out);
 	if (fin.fail())
@@ -303,7 +307,7 @@ void EditAttendance()
 		cout << i + 1 << ". " << student[i].name << endl;
 	}
 	int pos = 0;
-	cout << "Please choose from 1 to " << n  << ": " ;
+	cout << "Please choose from 1 to " << n << ": ";
 	cin >> pos;
 	pos--;
 	int length = student[pos].att->length();
@@ -321,7 +325,7 @@ void EditAttendance()
 		{
 			temp = student[pos].att[j];
 			temp.resize(11);
-			cout << j+1 << ". " << temp << ": Absent" << endl;
+			cout << j + 1 << ". " << temp << ": Absent" << endl;
 		}
 		else
 		{
@@ -333,7 +337,7 @@ void EditAttendance()
 	int choice;
 	cout << "Enter the day of attendance you would like to change (1-10): " << endl;
 	cin >> choice;
-	if (student[pos].att[choice-1][length - 1] == '0')
+	if (student[pos].att[choice - 1][length - 1] == '0')
 	{
 		cout << "Attendace edited to absent" << endl;
 		student[pos].att[choice - 1][length - 1] = '1';
@@ -493,12 +497,6 @@ int CheckTime(Schedule days) // return the position of that period in the period
 {
 	time_t now = time(0);
 	tm* time = localtime(&now);
-	cout << "Year:" << 1900 + time->tm_year << endl;
-	cout << "Month: " << 1 + time->tm_mon << endl;
-	cout << "Day: " << time->tm_mday << endl;
-	cout << "Time: " << time->tm_hour << ":";
-	cout << time->tm_min << ":";
-	cout << time->tm_sec << endl;
 	time->tm_year += 1900;
 	time->tm_mon++;
 	for (int i = 0; i < 10; i++)
@@ -621,12 +619,12 @@ void CheckIn()
 		days.day[i].month = stoi(temp.substr(5, 2));
 		days.day[i].day = stoi(temp.substr(8, 2));
 	}
-	
+
 	int tpos = CheckTime(days);
 	if (tpos == -1)
 		cout << "There is currently no class to check in" << endl;
 	else {
-		student[pos].att[tpos][length-1] = '0';
+		student[pos].att[tpos][length - 1] = '0';
 	}
 	fstream fout;
 	fout.open(filename, ios::out);
@@ -743,7 +741,7 @@ void ViewCheckIn()
 			student[pos].att[j].resize(11);
 			cout << student[pos].att[j] << ": Present" << endl;
 		}
-	cout << endl;
+		cout << endl;
 	}
 	fin.close();
 	delete[] student;
@@ -787,7 +785,7 @@ void ViewSchedules()
 	getline(fin, student.total);
 	for (int j = 0; j < 10; j++)
 		getline(fin, student.att[j]);
-	
+
 	Schedule days;
 	//Get hour and min
 	string temptime;
@@ -821,7 +819,7 @@ void ViewSchedules()
 		days.day[i].day = stoi(temp.substr(8, 2));
 	}
 	cout << "You have classes on these following days from " << days.startHour << ":" << days.startMin << " to " <<
-	days.endHour << ":" << days.endMin << endl;
+		days.endHour << ":" << days.endMin << endl;
 	for (int i = 0; i < 10; i++)
 	{
 		cout << days.day[i].day << "/" << days.day[i].month << "/" << days.day[i].year << endl;
@@ -898,7 +896,7 @@ void ViewScore()
 		delete[] student;
 		return;
 	}
-	
+
 	cout << "Your scores of this course: " << endl;
 	cout << "Midterm: " << student[pos].midterm << endl;
 	cout << "Final: " << student[pos].final << endl;
@@ -914,14 +912,70 @@ string dayFormat(int a)
 	else
 		return to_string(a);
 }
+void ViewCourse()
+{
+	string temp, filename;
+	cout << "Which student list would you like to see?" << endl;
+	cout << "Please enter the following information of the course: " << endl;
+	cout << "Year(yyyy-yyyy): ";
+	getline(cin, filename);
+	cout << "Semester: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Class: ";
+	getline(cin, temp);
+	filename += '-' + temp;
+	cout << "Course ID: ";
+	getline(cin, temp);
+	filename += '-' + temp + "-Student.txt";
+	fstream fin;
+	fin.open(filename, ios::in || ios::out);
+	if (fin.fail())
+	{
+		cout << "Khong mo duoc file";
+		fin.close();
+		return;
+	}
+	int n;
+	fin >> n;
+	fin.ignore();
+	Student* student = new Student[n + 1];
+	for (int i = 0; i < n; i++)
+	{
+		getline(fin, student[i].id);
+		getline(fin, student[i].password);
+		getline(fin, student[i].name);
+		getline(fin, student[i].DoB);
+		getline(fin, student[i].Class);
+		getline(fin, student[i].status);
+		getline(fin, student[i].midterm);
+		getline(fin, student[i].final);
+		getline(fin, student[i].bonus);
+		getline(fin, student[i].total);
+		for (int j = 0; j < 10; j++)
+			getline(fin, student[i].att[j]);
+		getline(fin, temp);
+		fin.ignore(1, '\n');
+	}
+	cout << "List of students studying: ";
+	for (int i = 0; i < n; i++)
+	{
+		if (student[i].status == "1")
+			cout << student[i].name << endl;
+	}
+	fin.close();
+	delete[] student;
+}
+
+
 int main()
 {
 	//ViewAttendance();
 	//ExportAttendance();
-	//ViewStudentList();
+	ViewStudentList();
 	//EditAttendance();
 	//EditGrade();
-	CheckIn();
+	//CheckIn();
 	//ViewCheckIn();
 	//ViewSchedules();
 	//ViewScore();
