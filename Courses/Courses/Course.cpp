@@ -36,6 +36,7 @@ void CreateYandS()
 				fin.ignore();
 			getline(fin, data[i].year);
 			getline(fin, data[i].semester);
+			fin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 	else
@@ -77,6 +78,7 @@ void UpdateYandS()
 				fin.ignore();
 			getline(fin, data[i].year);
 			getline(fin, data[i].semester);
+			fin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 	else
@@ -140,6 +142,7 @@ void DeleteYandS()
 				fin.ignore();
 			getline(fin, data[i].year);
 			getline(fin, data[i].semester);
+			fin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
 	else
@@ -201,6 +204,7 @@ void ViewYandS()
 				f.ignore();
 			getline(f, data[i].year);
 			getline(f, data[i].semester);
+			f.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 		for (int i = 0; i < n; i++)
 		{
@@ -1174,6 +1178,7 @@ void ViewAllLecturers()
 
 int main()
 {
+	ViewYandS();
 	//ImportAndCreateFile();
 	//AddNewCourse();
 	//EditCourse();
@@ -1183,7 +1188,7 @@ int main()
 	//ViewListOfCourse();
 	//ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
-	ViewAllLecturers();
+	//ViewAllLecturers();
 	system("pause>nul");
 	return 0;
 }
