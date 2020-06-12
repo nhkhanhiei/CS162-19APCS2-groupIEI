@@ -1064,13 +1064,14 @@ void ViewListOfCourse()
 //View list of Student in a Course (must import first)
 void ViewListOfStudentInCourse()
 {
-	string a;
-	cout << "Input class to view student list: ";
-	getline(cin, a);
-
 	int t;
 	cout << "Input id of course to view student list: ";
 	cin >> t;
+
+	string a;
+	cout << "Input class to view student list: ";
+	cin.ignore();
+	getline(cin, a);
 
 	
 	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
