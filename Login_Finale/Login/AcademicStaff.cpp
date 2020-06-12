@@ -1481,13 +1481,81 @@ void importClass()
 		cout << "Fail: " << i - 1 - w << endl;
 
 
-		/*fstream readFileTotal;
+		fstream readFileTotal;
 		readFileTotal.open("Student.txt", ios::in);
 
 		if (readFileTotal.fail())
 		{
-			cout << "Unable to read Student file!" << endl;
 			readFileTotal.close();
+
+			fstream readFileelement;
+			readFileelement.open(fileElement, ios::in);
+
+			StudentClass* sOfClass;
+			sOfClass = new StudentClass[w];
+
+			int count = 0;
+			int tempDay = 0;
+			int tempMonth = 0;
+			int tempYear = 0;
+			string temp;
+
+			for (int i = 0; i < w; i++)
+			{
+				getline(readFileelement, temp);
+				temp = "";
+				readFileelement >> sOfClass[i].id;
+				readFileelement.ignore();
+				getline(readFileelement, sOfClass[i].password);
+				getline(readFileelement, sOfClass[i].fullname);
+				readFileelement >> tempYear >> tempMonth >> tempDay;
+				readFileelement.ignore();
+				if (tempDay < 10)
+				{
+					sOfClass[i].dob.day += '0';
+				}
+				sOfClass[i].dob.day += to_string(tempDay);
+
+				if (tempMonth < 10)
+				{
+					sOfClass[i].dob.month += '0';
+				}
+				sOfClass[i].dob.month += to_string(tempMonth);
+
+				if (tempYear < 10)
+					sOfClass[i].dob.year += "000";
+				else if (tempYear < 100)
+					sOfClass[i].dob.year += "00";
+				else if (tempYear < 1000)
+					sOfClass[i].dob.year += '0';
+				sOfClass[i].dob.year += to_string(tempYear);
+
+				getline(readFileelement, temp);
+				readFileelement >> sOfClass[i].status;
+				readFileelement.ignore();
+				if (sOfClass[i].status == 1)
+					count += 1;
+			}
+			readFileelement.close();
+
+			fstream openFileTotal;
+			openFileTotal.open("Student.txt", ios::out);
+
+			openFileTotal << w << "\n";
+			for (int i = 0; i < w; i++)
+			{
+				openFileTotal << sOfClass[i].id;
+				openFileTotal << "\n";
+				openFileTotal << sOfClass[i].password;
+				openFileTotal << "\n";
+				openFileTotal << sOfClass[i].fullname << "\n";
+				openFileTotal << sOfClass[i].dob.year << " " << sOfClass[i].dob.month << " " << sOfClass[i].dob.day << "\n";
+				openFileTotal << cl << "\n";
+				openFileTotal << sOfClass[i].status;
+				openFileTotal << "\n\n";
+			}
+			delete[] sOfClass;
+			openFileTotal.close();
 		}
 		else
 		{
@@ -1551,6 +1619,7 @@ void importClass()
 
 			for (int i = z; i < z + w; i++)
 			{
+				getline(readFileelement, temp);
 				temp = "";
 				readFileelement >> sOfClass[i].id;
 				readFileelement.ignore();
@@ -1604,6 +1673,6 @@ void importClass()
 			}
 			delete[] sOfClass;
 			openFileTotal.close();
-		}*/
+		}
 	}
 }

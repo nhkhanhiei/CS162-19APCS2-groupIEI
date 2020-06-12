@@ -1,4 +1,4 @@
-4
+3
 19125007
 20010728
 Le Thao Huyen
@@ -8,7 +8,7 @@ Le Thao Huyen
 
 19125052
 20011115
-Tran Ky Nam
+Tran Ky Khang
 2001 11 15
 19CLC10
 1
@@ -16,14 +16,7 @@ Tran Ky Nam
 19125063
 2001115
 Chau Huu Phat
-2001 11 05
-19CLC10
-1
-
-11910021
-20010719
-Bui Dang Khoa
-2001 07 19
+2001 11 5
 19CLC10
 1
 
