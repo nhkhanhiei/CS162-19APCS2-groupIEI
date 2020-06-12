@@ -900,10 +900,12 @@ void RemoveStudentFromCourse()
 {
 	string removedstudent;
 	int t;
-	cout << "Input id of student you want to remove: ";
-	getline(cin, removedstudent);
 	cout << "Input id of course to remove the student from: ";
 	cin >> t;
+
+	cout << "Input id of student you want to remove: ";
+	cin.ignore();
+	getline(cin, removedstudent);
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
 
@@ -1202,14 +1204,14 @@ int main()
 	//CreateYandS();
 	ImportAndCreateFile();
 	//AddNewCourse();
-	EditCourse();
+	//EditCourse();
 	//RemoveCourse();
-	//RemoveStudentFromCourse();
+	RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
-	//ViewListOfStudentInCourse();
+	ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
-	ViewAllLecturers();
+	//ViewAllLecturers();
 	system("pause>nul");
 	return 0;
 }
