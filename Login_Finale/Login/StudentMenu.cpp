@@ -161,7 +161,7 @@ void ExportAttendance()
 	fout.close();
 	delete[] student;
 }
-void ViewStudentList()
+void ViewStudentsList()
 {
 	//2019-2020-HK2-19APCS1-CM101-Student.txt
 	string temp, filename;

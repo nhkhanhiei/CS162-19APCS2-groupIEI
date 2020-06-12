@@ -90,7 +90,7 @@ void Login(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2)
 
 void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
 {
-	int choice, choice1;
+	int choice; char choice1;
 	system("cls");
 	cout << "******************STUDENT******************" << endl;
 	cout << "    Hello " << a[i].fullname << endl;
@@ -114,6 +114,54 @@ void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 	case 1:
 		system("cls");
 		CheckIn();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuSinhVien(a, n, b, n1, c, n2, i);
+		break;
+	case 2:
+		system("cls");
+		ViewCheckIn();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuSinhVien(a, n, b, n1, c, n2, i);
+		break;
+	case 3:
+		system("cls");
+		ViewSchedules();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuSinhVien(a, n, b, n1, c, n2, i);
+		break;
+	case 4:
+		system("cls");
+		ViewScore();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuSinhVien(a, n, b, n1, c, n2, i);
 		break;
 	case 5:
 		SettingSV(a, n, b, n1, c, n2,i);
@@ -124,18 +172,6 @@ void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 	default:
 		break;
 	}
-	if (choice != 6)
-	{
-		do
-		{
-			cout << "Press f to return ^^: "; cin >> choice1;
-			if (choice1 != 'f')
-			{
-				cout << "Nooo press f ==!! ";
-			}
-		} while (choice1 != 'f');
-	}
-	MenuSinhVien(a, n, b, n1, c, n2, i);
 }
 
 void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i )
@@ -582,33 +618,127 @@ void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lectu
 
 void MenuLecturer(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
 {
-	int choice;
+	int choice; char choice1;
 	system("cls");
-	cout << "******************LECTURERS****************" << endl;
+	cout << "******************LECTURERS******************" << endl;
 	cout << "    Hello " << c[i].Fullname << endl;
 	cout << "       1. View list of courses in the current semester" << endl;
 	cout << "       2. View list of student of a course" << endl;
 	cout << "       3. View attendance list of a course" << endl;
-	cout << "       5. Edit an attendance" << endl;
-	cout << "       6. Import scoreboard" << endl;
-	cout << "       7. Edit grade of a student" << endl;
-	cout << "       8. View a scoreboard" << endl;
-	cout << "       9. Setting" << endl;
-	cout << "       10. Sign out" << endl;
-	cout << "******************************************" << endl;
+	cout << "       4. Edit an attendance" << endl;
+	cout << "       5. Import scoreboard" << endl;
+	cout << "       6. Edit grade of a student" << endl;
+	cout << "       7. View a scoreboard" << endl;
+	cout << "       8. Setting" << endl;
+	cout << "       9. Sign out" << endl;
+	cout << "********************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-10): ";
+		cout << "Enter your choice (1-9): ";
 		cin >> choice;
+		cin.ignore();
 		if (choice < 1 || choice>10)
 			cout << "Wrong choice! Please retry" << endl;
 	} while (choice < 1 || choice>10);
+
 	switch (choice)
 	{
-	case 9:
+	case 1:
+		system("cls");
+		ViewListOfCourse();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+		break;
+	case 2:
+		system("cls");
+		ViewStudentsList();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+	case 3:
+		system("cls");
+		ViewAttendance();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+	case 4:
+		system("cls");
+		EditAttendance();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+	case 5:
+		system("cls");
+		//Import();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+	case 6:
+		system("cls");
+		EditGrade();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+	case 7:
+		system("cls");
+		ViewScore();
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+		MenuLecturer(a, n, b, n1, c, n2, i);
+		break;
+	case 8:
 		SettingLecturer(a, n, b, n1, c, n2, i);
 		break;
-	case 10:
+	case 9:
 		ManHinhChinh(a, n, b, n1, c, n2);
 		break;
 	default:

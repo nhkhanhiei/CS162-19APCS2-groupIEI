@@ -144,6 +144,7 @@
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Lecturer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentMenu.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="AcademicCourses.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="HeaderStaffClass.h" />
+    <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="StudentMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
