@@ -68,7 +68,7 @@ void StaffProfile(Staff b[], int n1, int i) {
 
 void CapNhatPassStaff(Staff a[], int n, string newpass, int index) {
 	fstream file;
-	file.open("Staff1.txt", ios::out);
+	file.open("Staff.txt", ios::out);
 	if (file.fail())
 	{
 		cout << "Unable to create Student file!" << endl;
@@ -222,7 +222,6 @@ int viewStudent()
 		{
 			cout << i + 1 << ". " << endl;
 			cout << "Student ID: " << sOfClass[i].id << endl;
-			cout << "//Password: " << sOfClass[i].password << endl;
 			cout << "Name: " << sOfClass[i].fullname << endl;
 			cout << "Birthday: " << sOfClass[i].dob.day << "/" << sOfClass[i].dob.month << "/" << sOfClass[i].dob.year << endl;
 			cout << "Status: " << sOfClass[i].status;
@@ -1475,6 +1474,96 @@ void importClass()
 		}
 		delete[] row;
 		fin2.close();
+
+		fstream file1;
+		file1.open("Student.txt", ios::in);
+		if (file1.fail())
+		{
+			cout << "Unable to read Student file!" << endl;
+		}
+		else
+		{
+			int x;
+			file1 >> x;
+			Student* a;
+			a = new Student[x + 1];
+			for (int i = 0; i < x + 1; i++)
+			{
+				file1 >> a[i].id;
+				file1.ignore();
+				getline(file1, a[i].password);
+				getline(file1, a[i].fullname);
+				file1 >> a[i].dob.year;
+				file1.ignore();
+				file1 >> a[i].dob.month;
+				file1.ignore();
+				file1 >> a[i].dob.day;
+				file1.ignore();
+				getline(file1, a[i].classes);
+				file1 >> a[i].status;
+				file1.ignore();
+				file1.ignore();
+			}
+			file1.close();
+
+			a[x].id = sOfClass[z].id;
+			a[x].password = sOfClass[z].password;
+			a[x].dob.day = stoi(sOfClass[z].dob.day);
+			a[x].dob.month = stoi(sOfClass[z].dob.month);
+			a[x].dob.year = stoi(sOfClass[z].dob.year);
+			a[x].classes = cl;
+			a[x].fullname = sOfClass[z].fullname;
+			a[x].status = sOfClass[z].status;
+
+			file1.open("Student.txt", ios::out);
+			if (file1.fail())
+			{
+				cout << "Unable to create Student file!" << endl;
+			}
+			else
+			{
+				file1 << x + 1 << endl;
+				//a = new Student[n];
+				for (int i = 0; i < x + 1; i++)
+				{
+					file1 << a[i].id << endl;
+					file1 << a[i].password << endl;
+					file1 << a[i].fullname << endl;
+					file1 << a[i].dob.year << " ";
+					if (a[i].dob.month < 10)
+					{
+						file1 << "0" << a[i].dob.month << " ";
+					}
+					else
+					{
+						file1 << a[i].dob.month << " ";
+					}
+					if (a[i].dob.day < 10)
+					{
+						file1 << "0" << a[i].dob.day << endl;
+					}
+					else
+					{
+						file1 << a[i].dob.day << endl;
+					}
+					file1 << a[i].classes << endl;
+					if (i == x)
+					{
+						file1 << a[i].status;
+					}
+					else
+					{
+						file1 << a[i].status << endl;
+						file1 << endl;
+					}
+				}
+			}
+			file1.close();
+			delete[] a;
+		}
+		delete[] sOfClass;
+
+	}
 
 		cout << "\nImport students done!" << endl;
 		cout << "Success: " << w << endl;
