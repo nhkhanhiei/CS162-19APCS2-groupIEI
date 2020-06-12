@@ -863,7 +863,7 @@ void RemoveCourse()
 		Schedule[i].startMin = Schedule[i + 1].startMin;
 		Schedule[i].endHour = Schedule[i + 1].endHour;
 		Schedule[i].endMin = Schedule[i + 1].endMin;
-		Schedule[i].lectureRoom = Schedule[i + 1].id;
+		Schedule[i].lectureRoom = Schedule[i + 1].lectureRoom;
 	}
 	k--;
 
@@ -900,10 +900,12 @@ void RemoveStudentFromCourse()
 {
 	string removedstudent;
 	int t;
-	cout << "Input id of student you want to remove: ";
-	getline(cin, removedstudent);
 	cout << "Input id of course to remove the student from: ";
 	cin >> t;
+
+	cout << "Input id of student you want to remove: ";
+	cin.ignore();
+	getline(cin, removedstudent);
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
 
@@ -1202,14 +1204,14 @@ int main()
 	//CreateYandS();
 	ImportAndCreateFile();
 	//AddNewCourse();
-	EditCourse();
+	//EditCourse();
 	//RemoveCourse();
-	//RemoveStudentFromCourse();
+	RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
 	//ViewListOfCourse();
-	//ViewListOfStudentInCourse();
+	ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
-	ViewAllLecturers();
+	//ViewAllLecturers();
 	system("pause>nul");
 	return 0;
 }

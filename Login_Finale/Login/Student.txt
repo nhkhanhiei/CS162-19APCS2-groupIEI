@@ -1,5 +1,4 @@
-19
-
+20
 1751021
 19990401
 Nguyen Duc Thang
@@ -13,7 +12,6 @@ Nguyen Tran Quang Duy
 2000 04 10
 19APCS1
 1
-
 
 19125021
 20010917
@@ -60,7 +58,7 @@ Chu Duc An
 19125006
 20010318
 Truong Quy Hai
-2001-03-18
+2001 03 18
 19APCS2
 1
 
@@ -122,7 +120,7 @@ Le Thao Huyen
 
 19125052
 20011115
-Tran Ky Khang
+Tran Ky Nam
 2001 11 15
 19CLC10
 1
@@ -133,3 +131,10 @@ Chau Huu Phat
 2001 11 05
 19CLC10
 1
+
+12345678
+20010719
+Khoa Bui Dang
+2001 07 19
+19APCS2
+0
