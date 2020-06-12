@@ -616,6 +616,23 @@ void AddNewCourse()
 	getline(cin, newcourse.lectureRoom);
 
 	k++;
+
+	Schedule[k - 1].courseID = newcourse.courseID;
+	Schedule[k - 1].courseName = newcourse.courseName;
+	Schedule[k - 1].Class = newcourse.Class;
+	Schedule[k - 1].lecturerUsername = newcourse.lecturerUsername;
+	Schedule[k - 1].lecturerName = newcourse.lecturerName;
+	Schedule[k - 1].lecturerDegree = newcourse.lecturerDegree;
+	Schedule[k - 1].lecturerGender = newcourse.lecturerGender;
+	Schedule[k - 1].startDate = newcourse.startDate;
+	Schedule[k - 1].endDate = newcourse.endDate;
+	Schedule[k - 1].dayStudy = newcourse.dayStudy;
+	Schedule[k - 1].startHour = newcourse.startHour;
+	Schedule[k - 1].startMin = newcourse.startMin;
+	Schedule[k - 1].endHour = newcourse.endHour;
+	Schedule[k - 1].endMin = newcourse.endMin;
+	Schedule[k - 1].lectureRoom = newcourse.lectureRoom;
+
 	string filename = x + "-" + y + "-Schedule-" + z + ".txt";
 	ofstream f(filename);
 	if (f.is_open())
@@ -1178,9 +1195,9 @@ void ViewAllLecturers()
 
 int main()
 {
-	CreateYandS();
-	//ImportAndCreateFile();
-	//AddNewCourse();
+	//CreateYandS();
+	ImportAndCreateFile();
+	AddNewCourse();
 	//EditCourse();
 	//RemoveCourse();
 	//RemoveStudentFromCourse();
