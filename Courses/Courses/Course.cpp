@@ -60,6 +60,7 @@ void CreateYandS()
 	fout.close();
 }
 
+
 void UpdateYandS()
 {
 	int n;
@@ -122,6 +123,7 @@ void UpdateYandS()
 	fout.close();
 }
 
+
 void DeleteYandS()
 {
 	int n, m = -1;
@@ -183,6 +185,7 @@ void DeleteYandS()
 	}
 }
 
+
 void ViewYandS()
 {
 	int n;
@@ -210,6 +213,7 @@ void ViewYandS()
 		cout << "Could not open file!" << endl;
 	f.close();
 }
+
 
 //From a semester, import courses from a csv file
 
@@ -502,10 +506,8 @@ void ImportAndCreateFile()
 	cout << "Enter File: ";
 	getline(cin, t);
 
-
 	string temp;
 	
-
 	ifstream import(t);
 	if (import.is_open()) {
 		getline(import, temp);
