@@ -506,10 +506,8 @@ void ImportAndCreateFile()
 	cout << "Enter File: ";
 	getline(cin, t);
 
-
 	string temp;
 	
-
 	ifstream import(t);
 	if (import.is_open()) {
 		getline(import, temp);
