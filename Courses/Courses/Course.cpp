@@ -123,6 +123,7 @@ void UpdateYandS()
 	fout.close();
 }
 
+
 void DeleteYandS()
 {
 	int n, m = -1;
