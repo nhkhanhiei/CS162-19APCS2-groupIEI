@@ -885,7 +885,7 @@ void RemoveCourse()
 		Schedule[i].startMin = Schedule[i + 1].startMin;
 		Schedule[i].endHour = Schedule[i + 1].endHour;
 		Schedule[i].endMin = Schedule[i + 1].endMin;
-		Schedule[i].lectureRoom = Schedule[i + 1].id;
+		Schedule[i].lectureRoom = Schedule[i + 1].lectureRoom;
 	}
 	k--;
 
@@ -922,12 +922,11 @@ void RemoveStudentFromCourse()
 {
 	string removedstudent;
 	int t;
-	ViewListOfCourse();
-	cout << "Input the course you want to remove the student from (STT, Ex: 1, 2,..): ";
-	cin >> t; cin.ignore();
-	system("cls");
-	ViewListOfStudentInCourse();
-	cout << "Input ID of student you want to remove (Ex: 19127002): ";
+	cout << "Input id of course to remove the student from: ";
+	cin >> t;
+
+	cout << "Input id of student you want to remove: ";
+	cin.ignore();
 	getline(cin, removedstudent);
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";
@@ -1144,13 +1143,14 @@ void ViewListOfStudentInCourse()
 //View Attendance list of Student in a Course (must import first)
 void ViewAttendanceListOfCourse()
 {
-	string a;
-	cout << "Input class to view student list: ";
-	getline(cin, a);
 	ViewListOfCourse();
+	string a;
 	int t;
 	cout << "Input the course you want to view the attendance list (STT, Ex: 1, 2,..): ";
 	cin >> t;
+	cout << "Input class to view student list: "; cin.ignore();
+	getline(cin, a);
+	
 
 	cout << "Attendance List of Student(s) in this Course " << Schedule[t - 1].courseID << endl;
 	cout << "--------------------------------------------" << endl;
