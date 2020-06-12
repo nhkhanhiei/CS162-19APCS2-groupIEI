@@ -1185,7 +1185,7 @@ int main()
 	//RemoveCourse();
 	//RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
-	//ViewListOfCourse();
+	ViewListOfCourse();
 	//ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
 	//ViewAllLecturers();

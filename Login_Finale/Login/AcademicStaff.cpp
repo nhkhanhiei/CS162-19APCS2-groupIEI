@@ -68,7 +68,7 @@ void StaffProfile(Staff b[], int n1, int i) {
 
 void CapNhatPassStaff(Staff a[], int n, string newpass, int index) {
 	fstream file;
-	file.open("Staff1.txt", ios::out);
+	file.open("Staff.txt", ios::out);
 	if (file.fail())
 	{
 		cout << "Unable to create Student file!" << endl;
