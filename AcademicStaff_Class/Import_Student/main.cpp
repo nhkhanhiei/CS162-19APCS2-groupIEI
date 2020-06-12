@@ -1100,6 +1100,7 @@ void importClass()
 
 			for (int i = z; i < z + w; i++)
 			{
+				getline(readFileelement, temp);
 				temp = "";
 				readFileelement >> sOfClass[i].id;
 				readFileelement.ignore();
