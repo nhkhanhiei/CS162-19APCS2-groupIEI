@@ -707,6 +707,7 @@ void AddNewCourse()
 	else
 		cout << "Could not open file!" << endl;
 	fout.close();
+	UpdateLecturer();
 }
 
 // Edit Existing Course (must import first)
