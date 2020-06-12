@@ -1,4 +1,4 @@
-6
+9
 dbtien
 abcdef
 Dinh Ba Tien
@@ -33,4 +33,22 @@ hauvannguyen
 123456
 Nguyen Van Hau
 pHD
+0
+
+khoabuidang
+123456
+Bui Dang Khoa
+Master
+0
+
+haidang123
+123456
+Nguyen Hai Dang
+pHD
+0
+
+vuhanam
+123456
+Vu Ha Nam
+Professor
 0

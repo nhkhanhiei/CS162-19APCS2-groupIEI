@@ -460,7 +460,7 @@ void ImportAndCreateFile()
 	getline(cin, y);
 	cout << "Enter Class (Ex: 19APCS1,..): ";
 	getline(cin, z);
-	cout << "Enter File (Ex: 19APCS1-Schedule.csv: ";
+	cout << "Enter File (Ex: 19APCS1-Schedule.csv): ";
 	getline(cin, t);
 
 
@@ -557,7 +557,7 @@ void AddNewCourse()
 	cout << "Input course end date (mm/dd/yy): ";
 	getline(cin, enddate);
 	newcourse.endDate = stringToDate(enddate);
-	cout << "Input course day study (2-7): ";
+	cout << "Input course day study(2-7): ";
 	cin >> newcourse.dayStudy;
 	cout << "Input course start hour: ";
 	cin >> newcourse.startHour;
@@ -572,6 +572,7 @@ void AddNewCourse()
 	getline(cin, newcourse.lectureRoom);
 
 	k++;
+
 	Schedule[k - 1].courseID = newcourse.courseID;
 	Schedule[k - 1].courseName = newcourse.courseName;
 	Schedule[k - 1].Class = newcourse.Class;
@@ -587,7 +588,6 @@ void AddNewCourse()
 	Schedule[k - 1].endHour = newcourse.endHour;
 	Schedule[k - 1].endMin = newcourse.endMin;
 	Schedule[k - 1].lectureRoom = newcourse.lectureRoom;
-
 
 	string filename = x + "-" + y + "-Schedule-" + z + ".txt";
 	ofstream f(filename);
@@ -666,7 +666,7 @@ void AddNewCourse()
 		cout << "Could not open file!" << endl;
 	fout.close();
 
-	Lecturer* c=nullptr; int x;
+	Lecturer* c = nullptr; int x;
 	fstream file1;
 	file1.open("Lecturer.txt", ios::in);
 	if (file1.fail())
@@ -675,12 +675,12 @@ void AddNewCourse()
 	}
 	else
 	{
-		
+
 		file1 >> x;
 		file1.ignore();
-		
-		c = new Lecturer[x+1];
-		for (int i = 0; i < x+1; i++)
+
+		c = new Lecturer[x + 1];
+		for (int i = 0; i < x + 1; i++)
 		{
 			getline(file1, c[i].username);
 			getline(file1, c[i].password);
@@ -699,7 +699,7 @@ void AddNewCourse()
 	c[x].Occupation = newcourse.lecturerDegree;
 	c[x].gender = stoi(newcourse.lecturerGender);
 
-	
+
 	file1.open("Lecturer.txt", ios::out);
 	if (file1.fail())
 	{
@@ -707,9 +707,9 @@ void AddNewCourse()
 	}
 	else
 	{
-		file1 << x+1 << endl;
+		file1 << x + 1 << endl;
 
-		for (int i = 0; i < x+1; i++)
+		for (int i = 0; i < x + 1; i++)
 		{
 			file1 << c[i].username << endl;
 			file1 << c[i].password << endl;
@@ -725,7 +725,7 @@ void AddNewCourse()
 				file1 << endl;
 			}
 		}
-		
+
 	}
 	delete[] c;
 	file1.close();
@@ -926,6 +926,7 @@ void RemoveStudentFromCourse()
 	ViewListOfCourse();
 	cout << "Input the course you want to remove the student from (STT, Ex: 1, 2,..): ";
 	cin >> t; cin.ignore();
+	system("cls");
 	ViewListOfStudentInCourse();
 	cout << "Input ID of student you want to remove (Ex: 19127002): ";
 	getline(cin, removedstudent);
@@ -971,6 +972,8 @@ void RemoveStudentFromCourse()
 		cout << "Could not open file!" << endl;
 	fout.close();
 }
+
+
 
 // Add a student to a course (must import first)
 string DoBtoPassword(string input)
@@ -1090,23 +1093,28 @@ void ViewListOfCourse()
 //View list of Student in a Course (must import first)
 void ViewListOfStudentInCourse()
 {
-	string a;
-	cout << "Input class to view student list: ";
-	getline(cin, a);
 	ViewListOfCourse();
 	int t;
-	cout << "Input the course you want to view the student list (STT, Ex: 1, 2,..): ";
+	cout << "Input the course you want to view the student list from (STT, Ex: 1, 2,..): ";
 	cin >> t;
 
-	cout << "There is/are " << n << " Student(s) in this Course " << Schedule[t - 1].courseID << endl;
-	cout << "--------------------------------------------" << endl;
+	string a;
+	cout << "Input class to view student list: ";
+	cin.ignore();
+	getline(cin, a);
+
+
 	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
+
 	int m;
+
 	StudentCourses temp;
 	ifstream f(file);
 	if (f.is_open())
 	{
 		f >> m;
+		cout << "There is/are " << m << " Student(s) in this Course " << Schedule[t - 1].courseID << endl;
+		cout << "--------------------------------------------" << endl;
 		for (int i = 0; i < m; i++)
 		{
 			if (i == 0)
@@ -1135,16 +1143,15 @@ void ViewListOfStudentInCourse()
 }
 
 
-
 //View Attendance list of Student in a Course (must import first)
 void ViewAttendanceListOfCourse()
 {
 	string a;
 	cout << "Input class to view student list: ";
 	getline(cin, a);
-
+	ViewListOfCourse();
 	int t;
-	cout << "Input the course you want to remove the student from (STT, Ex: 1, 2,..): ";
+	cout << "Input the course you want to view the attendance list (STT, Ex: 1, 2,..): ";
 	cin >> t;
 
 	cout << "Attendance List of Student(s) in this Course " << Schedule[t - 1].courseID << endl;

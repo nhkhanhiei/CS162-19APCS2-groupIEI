@@ -96,17 +96,17 @@ void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 	cout << "       1. Check-in" << endl;
 	cout << "       2. Attendance result" << endl;
 	cout << "       3. Schedule" << endl;
-	cout << "       5. Grades" << endl;
-	cout << "       6. Setting" << endl;
-	cout << "       7. Sign out" << endl;
+	cout << "       4. Grades" << endl;
+	cout << "       5. Setting" << endl;
+	cout << "       6. Sign out" << endl;
 	cout << "******************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-7): ";
+		cout << "Enter your choice (1-6): ";
 		cin >> choice;
-		if (choice < 1 || choice>7)
+		if (choice < 1 || choice>6)
 			cout << "Wrong choice! Please retry" << endl;
-	} while (choice < 1 || choice>7);
+	} while (choice < 1 || choice>6);
 	switch (choice)
 	{
 	case 6:
@@ -129,17 +129,17 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 	cout << "       1. Class" << endl;
 	cout << "       2. Course" << endl;
 	cout << "       3. Scoreboard" << endl;
-	cout << "       5. Attendance list" << endl;
-	cout << "       6. Setting" << endl;
-	cout << "       7. Sign out" << endl;
+	cout << "       4. Attendance list" << endl;
+	cout << "       5. Setting" << endl;
+	cout << "       6. Sign out" << endl;
 	cout << "******************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-7): ";
+		cout << "Enter your choice (1-6): ";
 		cin >> choice;
-		if (choice < 1 || choice>7)
+		if (choice < 1 || choice>6)
 			cout << "Wrong choice! Please retry" << endl;
-	} while (choice < 1 || choice>7);
+	} while (choice < 1 || choice>6);
 	switch (choice)
 	{
 	case 1:
@@ -147,10 +147,15 @@ void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int 
 		break;
 	case 2:
 		MenuStaffCourses(a, n, b, n1, c, n2, i);
-	case 6:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
 		SettingStaff(a, n, b, n1, c, n2, i);
 		break;
-	case 7:
+	case 6:
 		ManHinhChinh(a, n, b, n1,c,n2);
 		break;
 	default:
@@ -506,7 +511,7 @@ void MenuStaffCoursesYearsSemesters(Student a[], int n, Staff b[], int n1, Lectu
 				cout << "Nooo press f ==!! ";
 			}
 		} while (choice1 != 'f');
-		MenuStaffCourses(a, n, b, n1, c, n2,i);
+		MenuStaffCourses(a, n, b, n1, c, n2, i);
 		break;
 	case 2:
 		system("cls");
