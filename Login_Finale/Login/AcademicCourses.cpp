@@ -1,4 +1,5 @@
 #include "AcademicCourses.h"
+#include "Header.h"
 
 void CreateYandS()
 {
@@ -528,6 +529,7 @@ void ImportAndCreateFile()
 }
 
 // Manually add an new course (must import first)
+// Add Acount to lecturer
 void AddNewCourse()
 {
 	CSD newcourse;
@@ -646,13 +648,79 @@ void AddNewCourse()
 	else
 		cout << "Could not open file!" << endl;
 	fout.close();
+
+	Lecturer* c=nullptr; int x;
+	fstream file1;
+	file1.open("Lecturer.txt", ios::in);
+	if (file1.fail())
+	{
+		cout << "Unable to read Staff file!" << endl;
+	}
+	else
+	{
+		
+		file1 >> x;
+		file1.ignore();
+		
+		c = new Lecturer[x+1];
+		for (int i = 0; i < x+1; i++)
+		{
+			getline(file1, c[i].username);
+			getline(file1, c[i].password);
+			getline(file1, c[i].Fullname);
+			getline(file1, c[i].Occupation);
+			file1 >> c[i].gender;
+			file1.ignore();
+			file1.ignore();
+		}
+	}
+	file1.close();
+
+	c[x].username = newcourse.lecturerUsername;
+	c[x].password = "123456";
+	c[x].Fullname = newcourse.lecturerName;
+	c[x].Occupation = newcourse.lecturerDegree;
+	c[x].gender = stoi(newcourse.lecturerGender);
+
+	
+	file1.open("Lecturer.txt", ios::out);
+	if (file1.fail())
+	{
+		cout << "Unable to create Student file!" << endl;
+	}
+	else
+	{
+		file1 << x+1 << endl;
+
+		for (int i = 0; i < x+1; i++)
+		{
+			file1 << c[i].username << endl;
+			file1 << c[i].password << endl;
+			file1 << c[i].Fullname << endl;
+			file1 << c[i].Occupation << endl;
+			if (i == x)
+			{
+				file1 << c[i].gender;
+			}
+			else
+			{
+				file1 << c[i].gender << endl;
+				file1 << endl;
+			}
+		}
+		
+	}
+	delete[] c;
+	file1.close();
+
 }
 
 // Edit Existing Course (must import first)
 void EditCourse()
 {
 	int t;
-	cout << "Input id of course to edit: ";
+	ViewListOfCourse();
+	cout << "Input id of course to edit (STT): ";
 	cin >> t;
 
 	string file = x + "-" + y + "-" + z + "-" + Schedule[t - 1].courseID + "-Student.txt";

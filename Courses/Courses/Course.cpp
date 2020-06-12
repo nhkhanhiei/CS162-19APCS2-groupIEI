@@ -1180,10 +1180,10 @@ int main()
 	//RemoveCourse();
 	//RemoveStudentFromCourse();
 	//AddNewStudentToCourse();
-	//ViewListOfCourse();
+	ViewListOfCourse();
 	//ViewListOfStudentInCourse();
 	//ViewAttendanceListOfCourse();
-	ViewAllLecturers();
+	//ViewAllLecturers();
 	system("pause>nul");
 	return 0;
 }
