@@ -1,6 +1,7 @@
 #include "Header.h"
 #include "HeaderStaffClass.h"
 #include "AcademicCourses.h"
+#include "StudentMenu.h"
 
 void ManHinhChinh(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2)
 {
@@ -89,7 +90,7 @@ void Login(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2)
 
 void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i)
 {
-	int choice;
+	int choice, choice1;
 	system("cls");
 	cout << "******************STUDENT******************" << endl;
 	cout << "    Hello " << a[i].fullname << endl;
@@ -104,20 +105,37 @@ void MenuSinhVien(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, i
 	{
 		cout << "Enter your choice (1-6): ";
 		cin >> choice;
+		cin.ignore();
 		if (choice < 1 || choice>6)
 			cout << "Wrong choice! Please retry" << endl;
 	} while (choice < 1 || choice>6);
 	switch (choice)
 	{
-	case 6:
+	case 1:
+		system("cls");
+		CheckIn();
+		break;
+	case 5:
 		SettingSV(a, n, b, n1, c, n2,i);
 		break;
-	case 7:
+	case 6:
 		ManHinhChinh(a, n, b, n1, c, n2);
 		break;
 	default:
 		break;
 	}
+	if (choice != 6)
+	{
+		do
+		{
+			cout << "Press f to return ^^: "; cin >> choice1;
+			if (choice1 != 'f')
+			{
+				cout << "Nooo press f ==!! ";
+			}
+		} while (choice1 != 'f');
+	}
+	MenuSinhVien(a, n, b, n1, c, n2, i);
 }
 
 void MenuStaff(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2, int i )
