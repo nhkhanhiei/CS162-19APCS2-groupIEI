@@ -300,7 +300,7 @@ void EditAttendance()
 	}
 
 	//Get student
-	cout << "Which student's attendace would you like to edit?" << endl;
+	cout << "Which student's attendance would you like to edit?" << endl;
 	for (int i = 0; i < n; i++)
 	{
 		cout << i + 1 << ". " << student[i].name << endl;
@@ -350,7 +350,7 @@ void EditAttendance()
 	fout.open(filename, ios::out);
 	if (fout.fail())
 	{
-		cout << "Can't open destination file!" << endl;
+		cout << "Can't open destination file to edit attendance!" << endl;
 		fin.close();
 		fout.close();
 		delete[] student;
