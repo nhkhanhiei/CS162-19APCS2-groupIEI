@@ -222,7 +222,6 @@ int viewStudent()
 		{
 			cout << i + 1 << ". " << endl;
 			cout << "Student ID: " << sOfClass[i].id << endl;
-			cout << "//Password: " << sOfClass[i].password << endl;
 			cout << "Name: " << sOfClass[i].fullname << endl;
 			cout << "Birthday: " << sOfClass[i].dob.day << "/" << sOfClass[i].dob.month << "/" << sOfClass[i].dob.year << endl;
 			cout << "Status: " << sOfClass[i].status;

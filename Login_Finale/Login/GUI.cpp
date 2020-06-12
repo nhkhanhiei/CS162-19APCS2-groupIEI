@@ -230,7 +230,7 @@ void MenuStaffScoreBoard(Student a[], int n, Staff b[], int n1, Lecturer c[], in
 	cout << "***************************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-8): ";
+		cout << "Enter your choice (1-3): ";
 		cin >> choice;
 		cin.ignore();
 		if (choice < 1 || choice>3)
@@ -285,7 +285,7 @@ void MenuStaffAttendance(Student a[], int n, Staff b[], int n1, Lecturer c[], in
 	cout << "***************************************************" << endl;
 	do
 	{
-		cout << "Enter your choice (1-8): ";
+		cout << "Enter your choice (1-3): ";
 		cin >> choice;
 		cin.ignore();
 		if (choice < 1 || choice>3)

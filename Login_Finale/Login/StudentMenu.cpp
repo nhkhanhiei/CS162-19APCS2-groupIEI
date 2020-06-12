@@ -1,4 +1,5 @@
 #include "StudentMenu.h"
+#include "HeaderStaffClass.h"
 
 void ViewAttendance()
 {
@@ -870,10 +871,10 @@ void ViewScore()
 	delete[] student;
 }
 
-void toUpper(char& c)
+/*void toUpper(char& c)
 {
 	c = toupper(static_cast<unsigned char>(c));
-}
+}*/
 
 void viewScoreboard()
 {
@@ -971,7 +972,7 @@ void viewScoreboard()
 
 void importScoreboard()
 {
-	cout << "Input scoreboard you would like to export: \n" << endl;
+	cout << "Input scoreboard you would like to import: \n" << endl;
 
 	cout << "   Class: ";
 	string classTemp;
