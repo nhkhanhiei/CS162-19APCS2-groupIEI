@@ -1055,7 +1055,7 @@ void ViewListOfStudentInCourse()
 	cout << "Input id of course to view student list: ";
 	cin >> t;
 
-	cout << "There is/are " << k << " Student(s) in this Course " << Schedule[t-1].courseID << endl;
+	cout << "There is/are " << n << " Student(s) in this Course " << Schedule[t-1].courseID << endl;
 	cout << "--------------------------------------------" << endl;
 	string file = x + "-" + y + "-" + a + "-" + Schedule[t - 1].courseID + "-Student.txt";
 	int m;
@@ -1178,7 +1178,7 @@ void ViewAllLecturers()
 
 int main()
 {
-	ViewYandS();
+	CreateYandS();
 	//ImportAndCreateFile();
 	//AddNewCourse();
 	//EditCourse();
