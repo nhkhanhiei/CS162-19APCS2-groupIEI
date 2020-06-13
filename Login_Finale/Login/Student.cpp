@@ -6,7 +6,7 @@ void NhapSVtuFile(Student*& a, int& n) {
 	file.open("Student.txt", ios::in);
 	if (file.fail())
 	{
-		cout << "Unable to read Student file!" << endl;
+		return;
 	}
 	else
 	{

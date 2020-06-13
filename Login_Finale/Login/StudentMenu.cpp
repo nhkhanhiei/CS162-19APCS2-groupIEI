@@ -618,6 +618,7 @@ void CheckIn()
 			fout << student[i].att[j] << endl;
 		fout << 1 << endl << endl;
 	}
+	if(tpos != -1)
 	cout << "Checked in successfully" << endl;
 	fin.close();
 	fout.close();

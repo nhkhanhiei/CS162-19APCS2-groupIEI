@@ -5,7 +5,7 @@ void NhapLecturertuFile(Lecturer*& c, int& n2) {
 	file.open("Lecturer.txt", ios::in);
 	if (file.fail())
 	{
-		cout << "Unable to read Staff file!" << endl;
+		return;
 	}
 	else
 	{

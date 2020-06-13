@@ -36,6 +36,8 @@ void ManHinhChinh(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2)
 
 void Login(Student a[], int n, Staff b[], int n1, Lecturer c[], int n2) 
 {
+	NhapSVtuFile(a, n);
+	NhapLecturertuFile(c,n1);
 	string id; string pass;
 	
 	cout << "Username: "; cin >> id;
@@ -555,6 +557,7 @@ void MenuStaffCourses(Student a[], int n, Staff b[], int n1, Lecturer c[], int n
 	case 6:
 		system("cls");
 		cin.ignore();
+		ViewListOfCourse();
 		RemoveStudentFromCourse();
 		do
 		{
