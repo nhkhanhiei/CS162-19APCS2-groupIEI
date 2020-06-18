@@ -1122,7 +1122,7 @@ void importScoreboard()
 		delete[] student;
 		delete[] row;
 
-		cout << "\nImport students done!" << endl;
+		cout << "\nImport students' score done!" << endl;
 	}
 
 }
